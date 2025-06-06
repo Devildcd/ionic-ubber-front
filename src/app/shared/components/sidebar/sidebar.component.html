@@ -1,0 +1,31 @@
+<ion-menu side="start" menuId="main-menu" contentId="main-content" class="dark-menu">
+  <ion-header>
+    <!-- Toolbar oscuro con logo y título -->
+    <ion-toolbar class="menu-toolbar">
+      <ion-img src="assets/logo.png" class="logo"></ion-img>
+      <ion-title>Mi App</ion-title>
+    </ion-toolbar>
+
+    <!-- Sección de perfil: avatar, nombre y usuario -->
+    <ion-item lines="none" class="profile-section">
+      <ion-avatar slot="start">
+        <img src="assets/profile.jpg" alt="Foto de perfil" />
+      </ion-avatar>
+      <ion-label class="profile-text">
+        <h2>Nombre Usuario</h2>
+        <p>usuario</p>
+      </ion-label>
+    </ion-item>
+  </ion-header>
+
+  <ion-content class="menu-content">
+    <ion-list lines="none">
+      <ion-menu-toggle auto-hide="false" *ngFor="let opt of options">
+        <ion-item button (click)="navigate(opt.url)" class="menu-item">
+          <ion-icon slot="start" [name]="opt.icon"></ion-icon>
+          <ion-label>{{ opt.label }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

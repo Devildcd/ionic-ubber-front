@@ -1,0 +1,40 @@
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button id="notif-fab" class="notif-fab">
+    <ion-icon name="notifications-outline" color="primary"></ion-icon>
+    <ion-badge color="danger" class="notif-badge">
+      47
+    </ion-badge>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-popover trigger="notif-fab" side="bottom" class="notif-popover">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Notificaciones</ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" size="small" (click)="markAllRead()">
+            <ion-icon slot="icon-only" name="checkmark-done-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="notif-content">
+      <ion-list>
+        <ion-item *ngFor="let n of notifications" [class.unread]="!n.read">
+          <ion-label>
+            <h3>{{ n.title }}</h3>
+            <p>{{ n.message }}</p>
+            <small>{{ n.date | date:'short' }}</small>
+          </ion-label>
+          <ion-button fill="clear" size="small" slot="end" (click)="markRead(n)">
+            <ion-icon
+              [name]="n.read ? 'checkmark-done-outline' : 'ellipse-outline'">
+            </ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>

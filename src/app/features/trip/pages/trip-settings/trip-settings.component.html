@@ -1,0 +1,203 @@
+<app-sidebar-fab></app-sidebar-fab>
+<app-notifications-fab></app-notifications-fab>
+
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Opciones de Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="tripForm" (ngSubmit)="submit()">
+    <div class="segment-wrapper">
+      <ion-segment formControlName="mode" (ionChange)="onModeChange($event)" class="simple-segment">
+        <ion-segment-button value="single">
+          <ion-label>Simple</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="multiple">
+          <ion-label>Multiple</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="search-wrapper">
+      <ion-card class="search-card">
+        <ion-card-content>
+          <ion-item lines="none" class="location-item">
+            <ion-icon name="navigate-outline" color="primary" slot="start"></ion-icon>
+            <ion-input placeholder="Santiago de Cuba" readonly></ion-input>
+            <ion-button fill="clear" size="small" slot="end">
+              <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <ng-container formArrayName="destinations">
+            <div *ngFor="let destCtrl of destinations.controls; let i = index" [formGroupName]="i"
+              class="destination-group">
+              <ion-item lines="none" class="destination-item">
+                <ion-icon name="location-outline" color="primary" slot="start"></ion-icon>
+                <ion-input placeholder="Destino {{ i + 1 }}" formControlName="address"></ion-input>
+                <ion-button *ngIf="tripForm.value.mode === 'multiple' && destinations.length > 1" fill="clear"
+                  size="small" slot="end" (click)="removeDestination(i)">
+                  <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </div>
+          </ng-container>
+
+          <ion-button *ngIf="tripForm.value.mode === 'multiple' && destinations.length < 5" (click)="addDestination()"
+            class="ion-margin-top add-destination-button" id="open-modal">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            Añadir Destino
+          </ion-button>
+
+          <ion-button  class="ion-margin-top add-destination-button" routerLink="/tabs/trip/map"
+            routerDirection="forward">
+            <ion-icon name="car-sport-outline" slot="start"></ion-icon>
+            Confirmar
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- LISTA DE VIAJES FRECUENTES -->
+   <ion-list class="trip-list">
+  <ion-list-header class="ss">
+    <ion-label class="frequent-trips-label">
+      <ion-icon name="time-outline"></ion-icon>
+      &nbsp;Viajes Frecuentes
+    </ion-label>
+      <!-- Ícono de “add” alineado a la derecha -->
+    <ion-button fill="clear" class="add-button">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-list-header>
+
+  <!-- ÍTEM estático 1 -->
+  <ion-item class="trip-item">
+    <ion-icon name="barbell-outline" slot="start" class="trip-icon"></ion-icon>
+
+    <ion-label class="trip-info">
+      <h2>Gym</h2>
+      <p>Calle 123, Centro</p>
+    </ion-label>
+
+    <!-- Agrupamos precio/distancia + botones en un solo slot="end" -->
+    <div slot="end" class="trip-end">
+      <!-- Etiqueta de precio y distancia -->
+      <ion-label class="trip-meta">
+        <h2>$940</h2>
+        <p>3 Km</p>
+      </ion-label>
+
+      <!-- Botones de acción -->
+      <div class="action-buttons">
+        <ion-button
+          shape="round"
+          fill="solid"
+          size="small"
+          class="btn-edit"
+          aria-label="Editar Gym">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          shape="round"
+          fill="solid"
+          size="small"
+          class="btn-edit"
+          aria-label="Editar Gym">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-item>
+
+  <!-- Ítem estático 2 -->
+  <ion-item class="trip-item">
+    <ion-icon name="cart-outline" slot="start" class="trip-icon"></ion-icon>
+
+    <ion-label class="trip-info">
+      <h2>Comercio</h2>
+      <p>Avenida X, Local 5</p>
+    </ion-label>
+
+    <!-- Aquí también agrupamos precio/distancia + botones -->
+    <div slot="end" class="trip-end">
+      <ion-label class="trip-meta">
+        <h2>$510</h2>
+        <p>2.5 Km</p>
+      </ion-label>
+
+      <div class="action-buttons">
+        <ion-button
+          shape="round"
+          fill="solid"
+          size="small"
+          class="btn-edit"
+          aria-label="Editar Comercio">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          shape="round"
+          fill="solid"
+          size="small"
+          class="btn-edit"
+          aria-label="Editar Gym">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-item>
+
+  <!-- ENLACE “VER HISTORIAL COMPLETO” AL FINAL DE LA LISTA -->
+  <ion-item lines="none" button detail routerLink="/tabs/trip/history" routerDirection="forward"
+    class="view-history-item">
+    <ion-icon slot="start" name="time-outline"></ion-icon>
+    <ion-label>Ver historial completo</ion-label>
+  </ion-item>
+</ion-list>
+
+
+
+      <!-- Modal estático -->
+      <ion-modal is-open="false" class="edit-modal">
+        <ng-template>
+          <div class="modal-backdrop"></div>
+          <ion-card class="modal-card">
+            <ion-card-header>
+              <ion-card-title>Editar Lugar</ion-card-title>
+              <ion-button fill="clear" class="modal-close" aria-label="Cerrar modal">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+            </ion-card-header>
+            <ion-card-content>
+              <form class="modal-form">
+                <ion-item>
+                  <ion-label position="stacked">Nombre</ion-label>
+                  <ion-input placeholder="Gym"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Dirección</ion-label>
+                  <ion-input placeholder="Calle 123, Centro"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Precio Estimado</ion-label>
+                  <ion-input type="number" placeholder="940"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Distancia (Km)</ion-label>
+                  <ion-input type="number" placeholder="3"></ion-input>
+                </ion-item>
+                <div class="modal-actions">
+                  <ion-button expand="block">Guardar</ion-button>
+                  <ion-button expand="block" color="danger">Eliminar</ion-button>
+                </div>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ng-template>
+      </ion-modal>
+    </div>
+  </form>
+</ion-content>

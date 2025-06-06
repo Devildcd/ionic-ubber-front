@@ -1,0 +1,183 @@
+/* Espaciado general del contenido */
+ion-content.ion-padding {
+  /* Sólo padding seguro, sin flex ni gap */
+  --padding-top: var(--ion-safe-area-top, 16px);
+  --padding-bottom: var(--ion-safe-area-bottom, 16px);
+  padding-inline: 16px;
+}
+
+/* Barra de búsqueda */
+.search-now-container {
+  margin-top: 20px;
+}
+
+ion-searchbar {
+  --background: #f4f5f8;
+  --border-radius: 10px;
+}
+
+/* Sección de lugares */
+.places ion-list {
+  background: transparent;
+}
+
+.places ion-item {
+  margin-bottom: 12px;
+  border-radius: 10px;
+  --background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.places ion-icon {
+  color: var(--ion-color-primary);
+  font-size: 20px;
+}
+
+.places h3 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.places p {
+  font-size: 0.875rem;
+  color: var(--ion-color-medium);
+  margin: 4px 0 0;
+}
+
+/* Sugerencias */
+.suggestions-grid {
+  margin-top: 12px;
+}
+
+.suggestions-grid .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.suggestions-grid h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.suggestions-grid ion-button {
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  color: var(--ion-color-primary);
+  padding: 0;
+  height: auto;
+}
+
+/* Cards de sugerencias */
+ion-card {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+ion-card:hover {
+  transform: translateY(-2px);
+}
+
+.suggestion-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 8px;
+}
+
+.suggestion-card-content ion-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary);
+}
+
+.suggestion-card-content ion-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+
+/* 1) El wrapper ocupa toda la altura y es columna */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;           /* asegura 100% de ion-content */
+}
+
+/* 2) Las secciones fijas no crecen */
+.search-now-container,
+.places {
+  flex: 0 0 auto;         /* height según contenido */
+  margin-bottom: 24px;
+}
+
+/* 3) Suggestions crece y permite scroll interno */
+.suggestions-grid {
+  flex: 1 1 auto;         /* ocupa espacio restante */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4) Header de sección fijo */
+.suggestions-grid .section-header {
+  flex: 0 0 auto;
+}
+
+/* 5) Contenedor de cards con CSS Grid */
+.cards-container {
+  flex: 1 1 auto;         /* ocupa resto dentro de suggestions */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-auto-rows: auto;
+  gap: 16px;              /* separación responsive */
+  overflow-y: auto;       /* scroll si hay muchas cards */
+  padding-top: 8px;
+}
+
+/* 6) Ajustes de cada card wrapper */
+.cards-container .card {
+  display: flex;
+}
+
+/* 7) Tus estilos existentes para ion-card y .suggestion-card-content */
+ion-card {
+  width: 100%;            /* que el card llene la celda */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+ion-card:hover {
+  transform: translateY(-2px);
+}
+.suggestion-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 8px;
+}
+
+
+
+
+.suggestions-carousel {
+  margin-top: 12px;
+  /* opcional: altura fija de carrusel */
+}
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+}
+.card-wrapper {
+  flex: 0 0 140px;           /* ancho fijo por card */
+  scroll-snap-align: start;  /* snap por card */
+}

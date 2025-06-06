@@ -1,0 +1,212 @@
+<app-sidebar-fab></app-sidebar-fab>
+<app-notifications-fab></app-notifications-fab>
+
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Historial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="historial-content">
+<!-- 1) Segmento principal: Mis Viajes / Calificaciones -->
+<ion-segment
+  [(ngModel)]="selectedSegment"
+  (ionChange)="onSegmentChanged($event)"
+  class="simple-segment"
+>
+  <ion-segment-button value="viajes">
+    <ion-icon name="car-outline"></ion-icon>
+    <ion-label>Mis Viajes</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="calificaciones">
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-label>Calificaciones</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<!-- Espacio entre el segment principal y los controles secundarios -->
+<div class="history-controls">
+  <!-- 2) Controles comunes: FILTROS de tiempo -->
+  <div class="filter-container">
+    <ion-segment
+      [(ngModel)]="selectedFilter"
+      (ionChange)="onFilterChanged($event)"
+      class="filter-segment"
+    >
+      <ion-segment-button value="recent">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Hoy</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="week">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>7 días</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="month">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        <ion-label>Mes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="all">
+        <ion-icon name="albums-outline"></ion-icon>
+        <ion-label>Todo</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+
+ <!-- Paginador estático + Botón Borrar Historial -->
+  <div class="paginator-container">
+    <div class="pagination-controls">
+      <ion-button fill="clear" class="btn-prev" aria-label="Página anterior">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <span class="page-indicator">Página 1 / 5</span>
+      <ion-button fill="clear" class="btn-next" aria-label="Página siguiente">
+        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-button fill="clear" class="btn-delete-history" (click)="clearAll()"
+    [attr.aria-label]="'Eliminar todo el historial de ' + (selectedSegment === 'viajes' ? 'viajes' : 'calificaciones')">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      <span class="delete-text">Borrar historial</span>
+    </ion-button>
+  </div>
+
+  <!-- 3) SECCIÓN “MIS VIAJES” -->
+<ng-container *ngIf="selectedSegment === 'viajes'">
+  <ion-list class="historial-list">
+   <ion-card *ngFor="let trip of filteredTrips" class="trip-card-compact">
+  <!-- HEADER ÚNICO: fecha a la izquierda + badge a la derecha -->
+  <ion-card-header class="card-header-compact">
+    <div class="left-row">
+      <ion-icon name="calendar-outline" class="icon-small"></ion-icon>
+      <ion-card-title class="text-small">{{ trip.date | date: 'dd MMM, yyyy' }}</ion-card-title>
+    </div>
+    <div class="rating-badge-compact" *ngIf="trip.rating !== null">
+      <ion-icon name="trophy-outline"></ion-icon>
+      <span class="badge-text-small">{{ trip.rating.toFixed(1) }}</span>
+    </div>
+  </ion-card-header>
+
+      <!-- CONTENIDO ÚNICO: origen → destino en línea, debajo distancia/precio y horarios juntos -->
+     <ion-card-content class="card-content-compact">
+  <!-- Origen y Destino apilados -->
+  <div class="route-vertical">
+    <div class="loc-block">
+      <ion-icon name="location-outline" class="icon-small"></ion-icon>
+      <span class="text-small">{{ trip.origin }}</span>
+    </div>
+    <div class="loc-block">
+      <ion-icon name="flag-outline" class="icon-small"></ion-icon>
+      <span class="text-small">{{ trip.destination }}</span>
+    </div>
+  </div>
+
+  <!-- Distancia / Precio / Horarios -->
+  <div class="meta-time-row">
+    <div class="meta-inline">
+      <ion-icon name="flash-outline" class="icon-small"></ion-icon>
+      <span class="text-small">{{ trip.distance }} km</span>
+    </div>
+    <div class="meta-inline">
+      <ion-icon name="cash-outline" class="icon-small"></ion-icon>
+      <span class="text-small">${{ trip.price.toFixed(2) }}</span>
+    </div>
+    <div class="time-inline">
+      <ion-icon name="checkmark-done-outline" class="icon-small"></ion-icon>
+      <span class="text-small">{{ trip.timeAccepted | date: 'HH:mm' }}</span>
+    </div>
+    <div class="time-inline">
+      <ion-icon name="walk-outline" class="icon-small"></ion-icon>
+      <span class="text-small">{{ trip.timeArrived | date: 'HH:mm' }}</span>
+    </div>
+  </div>
+
+  <ion-button
+    fill="clear"
+    class="btn-delete-compact"
+    (click)="deleteTrip(trip.id)"
+    [attr.aria-label]="'Eliminar ' + (trip.date | date: 'dd MMM')"
+  >
+    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+  </ion-button>
+</ion-card-content>
+
+    </ion-card>
+
+    <div class="no-data" *ngIf="filteredTrips.length === 0">
+      <ion-icon name="car-sport-outline" class="no-data-icon"></ion-icon>
+      <p>No hay viajes en el rango seleccionado.</p>
+    </div>
+  </ion-list>
+</ng-container>
+
+
+  <!-- 4) SECCIÓN “CALIFICACIONES” -->
+ <ng-container *ngIf="selectedSegment === 'calificaciones'">
+  <ion-list class="rating-history-list">
+    <ion-card *ngFor="let item of filteredRatings" class="rating-card">
+  <!-- 1) Cabecera de la tarjeta: solo la fecha -->
+  <ion-card-header class="rating-card-header">
+    <div class="header-left">
+      <ion-icon name="calendar-outline" class="icon-date"></ion-icon>
+      <ion-card-title class="text-date">
+        {{ item.date | date: 'dd MMM, yyyy' }}
+      </ion-card-title>
+    </div>
+  </ion-card-header>
+
+  <!-- 2) Contenido: estrellas y comentario -->
+  <ion-card-content class="rating-card-content">
+    <div class="stars-row">
+      <ng-container *ngFor="let _ of [].constructor(5); let i = index">
+        <ion-icon
+          [name]="
+            i < Math.floor(item.rating)
+              ? 'star'
+              : (i < item.rating ? 'star-half' : 'star-outline')
+          "
+          class="icon-star"
+        ></ion-icon>
+      </ng-container>
+      <span class="rating-value">{{ item.rating.toFixed(1) }}/5</span>
+    </div>
+
+    <div class="comment-block">
+      <p>{{ item.comment }}</p>
+    </div>
+  </ion-card-content>
+
+  <!-- 3) Botones de acción (Editar y Eliminar) debajo del contenido -->
+  <div class="rating-actions">
+    <!-- Botón Editar -->
+    <ion-button
+      fill="clear"
+      class="btn-edit"
+      [attr.aria-label]="'Editar calificación del ' + (item.date | date:'dd MMM, yyyy')"
+    >
+      <ion-icon slot="icon-only" color="primary" name="pencil-outline"></ion-icon>
+    </ion-button>
+
+    <!-- Botón Eliminar -->
+    <ion-button
+      fill="clear"
+      class="btn-delete"
+      [attr.aria-label]="'Eliminar calificación del ' + (item.date | date:'dd MMM, yyyy')"
+    >
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-card>
+
+
+    <!-- Mensaje si no hay calificaciones tras el filtrado -->
+    <div class="no-data">
+      <ion-icon name="star-outline" class="no-data-icon"></ion-icon>
+      <p>No hay calificaciones en el rango seleccionado.</p>
+    </div>
+  </ion-list>
+</ng-container>
+</ion-content>

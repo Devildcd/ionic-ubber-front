@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ion-content,
+ion-content .scroll-content {
+  --padding: 0;
+}
+
+.map-container {
+  flex: 1;           /* ocupa todo el espacio disponible */
+  position: relative;/* para que el <google-map> use 100% correctamente */
+}
+
+google-map {
+  height: 100%;      /* ocupa el 100% de su contenedor */
+  width: 100%;
+}
+
+.menu-fab {
+  --background: #ffffff;
+  --box-shadow: none;
+}
+

@@ -1,0 +1,157 @@
+/* ========================================
+   1. Encabezado con degradado
+   ======================================== */
+.header-gradient {
+  /* Cambio a un degradado oscuro */
+  --background: linear-gradient(135deg, #1f2733, #2c3440);
+
+  ion-title {
+    color: #e0e0e0;         /* Texto claro */
+    font-weight: 600;
+  }
+}
+
+/* ========================================
+   2. Drag Handle (asa deslizante)
+   ======================================== */
+.drag-handle {
+  width: 45px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);  /* Más tenue sobre fondo oscuro */
+  border-radius: 3px;
+  margin: 10px auto;
+}
+
+/* ========================================
+   3. Fondo de contenido genérico
+   ======================================== */
+.content-bg {
+  --background: #1e1e1e;     /* Fondo oscuro uniforme */
+  padding: 0 16px;
+}
+
+/* ========================================
+   4. Segmento dentro de una tarjeta (card-segment)
+   ======================================== */
+.card-segment {
+  margin: 16px 15px;
+  --box-shadow: none;
+  
+
+  ion-segment {
+    background: transparent;       /* Fondo oscuro para el segmento */
+    --indicator-color: #ff6f61; /* Mantiene indicador en rojo */
+    --indicator-height: 4px;
+
+    ion-segment-button {
+      --color: #bbbbbb;         /* Texto gris claro en no seleccionado */
+      --color-checked: #ff6f61; /* Texto rojo cuando está activo */
+      font-weight: 500;
+      text-transform: capitalize;
+      padding: 8px 20px;
+
+      ion-icon {
+        margin-right: 4px;
+        color: #bbbbbb;         /* Icono gris claro cuando no está activo */
+      }
+    }
+
+    /* Botón seleccionado (checked) */
+    ion-segment-button[aria-checked="true"] {
+      --background: rgba(255, 111, 97, 0.1); /* Fondo rojo claro semitransparente */
+      ion-icon {
+        color: #ff6f61;       /* Icono en rojo cuando está activo */
+      }
+    }
+  }
+}
+
+/* ========================================
+   5. Tarjeta de ruta (card-route)
+   ======================================== */
+.card-route {
+  padding: 16px;
+  border-radius: 14px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  background: #2c2c2e;       /* Fondo oscuro sólido */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .route-points {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .point {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      color: #e0e0e0;       /* Texto claro */
+
+      ion-icon {
+        font-size: 20px;
+        color: #ff6f61;     /* Ícono de punto en rojo */
+      }
+    }
+
+    .divider-icon {
+      font-size: 18px;
+      color: #555;         /* Gris medio */
+    }
+  }
+
+  .route-meta {
+    display: flex;
+    justify-content: space-between;
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #bbbbbb;     /* Texto gris claro */
+
+      ion-icon {
+        font-size: 18px;
+        color: #bbbbbb;   /* Ícono en gris claro */
+      }
+    }
+  }
+}
+
+/* ========================================
+   6. Acciones (botones de Confirmar/Cancelar)
+   ======================================== */
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin: 16px 15px;
+
+  .btn-confirm {
+    flex: 1;
+    --background: var(--ion-color-primary);  /* Mantiene color primario (rojo intenso) */
+    --border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffffff;                          /* Texto en blanco */
+  }
+
+  .btn-cancel {
+    flex: 1;
+    --background: transparent;
+    --border-radius: 8px;
+    font-weight: 500;
+    --color: #ff6f61;                        /* Texto en rojo para cancelar */
+    border: 1px solid #ff6f61;               /* Borde rojo para contraste */
+  }
+}
+// end
+
+
+
+
+
+

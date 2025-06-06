@@ -1,0 +1,132 @@
+/* ------------------------------------------------------------
+  1) Estilos globales del menú en modo oscuro
+------------------------------------------------------------ */
+.dark-menu {
+  --background: #121212;             /* Fondo general del menú */
+  --color: #E0E0E0;                  /* Color de texto predeterminado */
+  --ion-item-background: transparent;/* Los items toman el fondo por defecto */
+}
+
+/* ------------------------------------------------------------
+  2) Toolbar oscuro con logo y título
+------------------------------------------------------------ */
+.menu-toolbar {
+  --background: #1F1F1F;             /* Fondo más claro que el general para destacarlo */
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu-toolbar .logo {
+  width: 100px;
+  height: 32px;
+  margin-right: 0.75rem;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.menu-toolbar ion-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #FFFFFF;                    /* Texto blanco para el título */
+}
+
+/* ------------------------------------------------------------
+  3) Sección de perfil (avatar + nombre/usuario)
+------------------------------------------------------------ */
+.profile-section {
+  --background: #1F1F1F;             /* Mismo fondo que toolbar para continuidad visual */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-section ion-avatar {
+  --size: 48px;
+  margin-right: 0.75rem;
+  border: 2px solid #333333;         /* Borde sutil alrededor del avatar */
+}
+
+.profile-section .profile-text h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.profile-section .profile-text p {
+  font-size: 0.85rem;
+  margin: 0;
+  color: #BBBBBB;
+}
+
+/* ------------------------------------------------------------
+  4) Contenido del listado (scrollable)
+------------------------------------------------------------ */
+.menu-content {
+  --background: #121212;             
+  padding-top: 0.5rem;               /* Pequeño acolchado superior */
+}
+
+/* Personalizar scrollbar en modo oscuro (WebKit) */
+.menu-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-content::-webkit-scrollbar-track {
+  background: #1F1F1F;
+  border-radius: 3px;
+}
+
+.menu-content::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+
+/* ------------------------------------------------------------
+  5) Cada ítem del menú
+------------------------------------------------------------ */
+.menu-item {
+  --background: transparent;
+  --color: #E0E0E0;                  /* Texto e icono en gris claro */
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.25rem 0;                 /* Espacio vertical entre cada item */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.menu-item ion-icon {
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  color: #E0E0E0;                    /* Icono en gris claro */
+}
+
+/* Estado “hover” y “active” de cada item */
+.menu-item:hover {
+  --background: #2A2A2A;
+}
+
+.menu-item:active {
+  --background: #383838;
+  --color: #FFFFFF;                  /* Texto e icono en blanco al hacer tap */
+}
+
+/* Separador opcional (si quisieras una línea entre grupos de opciones) */
+.menu-item.divider {
+  --border-color: #333333;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0.5rem 0;
+}
+
+/* ------------------------------------------------------------
+  6) Ajustes adicionales: estilos de selección y ripples
+------------------------------------------------------------ */
+/* Ripple de Ionic más tenue para que combine con el fondo oscuro */
+.menu-item ion-ripple-effect {
+  --ripple-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Para garantizar que el texto nunca sea oscuro sobre fondo oscuro */
+.menu-item .item-native {
+  color: #E0E0E0 !important;
+}

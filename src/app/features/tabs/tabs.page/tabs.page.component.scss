@@ -1,0 +1,28 @@
+/* 1. Apunta a la clase que le diste al ion-tab-bar: */
+.custom-tab-bar {
+  /* Fondo oscuro general del tab bar */
+  --background: #2c2c2e;
+
+  /* Línea superior para separar del contenido */
+  border-top: 1px solid #3a3a3c;
+
+  /* 2. Dentro del tab-bar, cada botón tendrá colores claros/oscuro */
+  ion-tab-button {
+    /* Color de icono y label cuando NO está seleccionado */
+    --color: #e0e0e0;
+
+    /* Color que toma el icono/label cuando el tab está activo */
+    --color-selected: var(--ion-color-primary);
+
+    /* Fondo transparente para no “brillar” arriba del gris oscuro */
+    --background: transparent;
+
+    /* 3. Si quieres agregar un indicador (la línea pequeñita que a veces aparece) */
+    --indicator-color: var(--ion-color-primary);
+
+    /* Si Ion le aplica la clase .tab-selected al botón, puede heredarse el mismo fondo */
+    &.tab-selected {
+      background: #2c2c2e;
+    }
+  }
+}

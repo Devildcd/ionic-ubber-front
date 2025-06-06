@@ -1,0 +1,151 @@
+.perfil-container {
+  --background: #1e1e1e; /* Fondo oscuro general */
+}
+
+
+/* 1. Estilo general para el ion-header */
+ion-header {
+  /* Fondo oscuro para todo el header */
+  background: #1e1e1e; 
+  /* Si en variables.scss definiste: --color-border-dark: #3a3a3c; */
+  --border-color: #3a3a3c; /* para una posible línea en el toolbar */
+
+  /* 2. Primer toolbar (puede estar vacío o con botones) */
+  ion-toolbar:first-of-type {
+    /* Si no necesitas borde inferior aquí, basta el fondo */
+    --background: #1e1e1e;     /* gris oscuro uniforme */
+    --color: #e0e0e0;           /* texto claro por defecto */
+    border-bottom: 1px solid #1e1e1e; /* línea sutil para separar herramientas */
+    
+    /* Mejora: transición suave para cambios de color */
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* 3. Segundo toolbar, donde está el título */
+  ion-toolbar:nth-of-type(2) {
+    --background: #1e1e1e;   /* mismo gris oscuro */
+    --color: #ffffff;         /* título en blanco para máxima legibilidad */
+    border-bottom: 1px solid #3a3a3c; /* separación de la parte de contenido */
+    
+    /* Mejora: alineación y espacio más consistente */
+    padding: 0 16px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* 4. Asegurar que el título (ion-title) se vea bien */
+ion-title {
+  /* Si quieres centrarlo y con fuente clara */
+  color: #ffffff;
+  font-weight: 600;      /* opcional, si lo quieres un poco más destacado */
+  font-size: 1.25rem;    /* ligeramente mayor para legibilidad */
+  text-align: center;
+  flex: 1;
+}
+
+/* 5. Si hay botones o íconos en el toolbar, que también sean claros */
+ion-toolbar ion-button,
+ion-toolbar ion-icon {
+  color: #e0e0e0;
+  transition: color 0.2s ease;
+}
+ion-toolbar ion-button:hover,
+ion-toolbar ion-button:focus,
+ion-toolbar ion-icon:hover,
+ion-toolbar ion-icon:focus {
+  color: #ffffff;
+}
+ion-card {
+  background: #2c2c2e; /* Fondo de tarjeta oscuro */
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+ion-card-header {
+  background: rgba(44, 44, 46, 0.85); /* Cabecera ligeramente translúcida */
+  border-bottom: 1px solid #3a3a3c;    /* Borde oscuro */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff; /* Texto claro */
+}
+
+.profile-pic-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ion-color-primary); /* El color primario se puede mantener */
+}
+
+.btn-edit {
+  --border-radius: 8px;
+  --border-color: var(--ion-color-primary);
+  --color: var(--ion-color-primary);
+  margin-top: 1rem;
+  background: transparent; /* Botón sobre fondo oscuro */
+}
+
+ion-item {
+  --min-height: 50px;
+  background: transparent; /* Fondo transparente para que se vea el fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+  --ion-item-background: transparent;
+}
+
+ion-item ion-icon {
+  font-size: 1.4rem;
+  color: #9a9a9a; /* Iconos en un gris claro */
+}
+
+ion-toggle {
+  --handle-background: var(--ion-color-primary);
+  --background: #3a3a3c; /* Fondo del toggle en un gris oscuro */
+}
+
+/* Si necesitas cambiar también el color del texto dentro de ion-item */
+ion-item .item-inner {
+  color: #e0e0e0;
+}
+
+// Estilos sobre la lista
+ion-list {
+  background: #2c2c2e;           /* Mismo gris oscuro que los ion-card */
+  border-radius: 12px;          /* Bordes suaves para que combine */
+  margin: 1rem 0;               /* Separación vertical */
+  padding: 0.5rem 0;            /* Un poco de espacio interno */
+}
+
+ion-list ion-item {
+  background: transparent;      /* Dejar el fondo transparente para que se vea el ion-list */
+  color: #e0e0e0;               /* Texto claro */
+  border-bottom: 1px solid #3a3a3c; /* Línea divisoria oscura */
+  --ion-item-background: transparent;
+}
+
+ion-list ion-item:last-child {
+  border-bottom: none;          /* Quitar la línea del último ítem */
+}
+
+ion-list ion-item ion-icon {
+  color: #9a9a9a;               /* Iconos en gris claro */
+}
+
+/* Si quieres un poco de separación entre ítems y bordes internos: */
+ion-list {
+  --inner-border-width: 0;      /* Quitar bordes por defecto si aparecen */
+}

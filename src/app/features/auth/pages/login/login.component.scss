@@ -1,0 +1,219 @@
+/* ===========================================
+   Estilos personalizados para login.page
+   =========================================== */
+
+/* 1. Fondo con imagen en toda la pantalla */
+.auth-background {
+  position: relative;
+  --background: none; /* Cancelamos el fondo por defecto de Ionic */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Reemplaza la URL por la ruta de tu imagen en /assets */
+  background-image: url('/assets/images/image.jpg');
+}
+
+/* 2. Overlay semitransparente para oscurecer la imagen */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* ========================================
+   2. Wrapper de búsqueda (formulario)
+   ======================================== */
+.search-wrapper {
+  position: absolute;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0; */
+  display: flex;
+  justify-content: center;     /* centrar horizontal */
+  align-items: center;         /* centrar vertical */
+  z-index: 100;
+  pointer-events: none;        /* deja pasar todos los eventos al fondo */
+  transition: opacity 400ms ease, transform 500ms ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Card dentro del wrapper de búsqueda */
+.search-wrapper > ion-card {
+  pointer-events: auto;        /* la card vuelve a capturar clicks y gestos */
+  width: clamp(300px, 90%, 500px);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);  /* Fondo oscuro semitransparente */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Estado oculto: se aplica cuando .hidden está presente */
+.search-wrapper.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;         /* para que los clics/touches pasen por debajo */
+}
+
+/* ========================================
+   3. Contenido interno de la card de búsqueda
+   ======================================== */
+.search-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);  /* Fondo oscuro semitransparente */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Botón que aparece sobre el mapa (dentro de la card) */
+/* Ya no se usa .map-button para login, pero lo dejamos por referencia */
+.search-card .map-button {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue sobre oscuro */
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;              /* Para que los clicks funcionen en el botón */
+}
+
+.search-card .map-button ion-icon {
+  font-size: 1.2rem;
+  color: #e0e0e0;                     /* Icono en color claro */
+}
+
+.search-card .map-button ion-label {
+  font-size: 16px;
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Contenido del ion-card */
+.search-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ítems de ubicación/destino (ahora reutilizados para correo/contraseña) */
+.search-card .location-item,
+.search-card .destination-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue */
+  border-radius: 8px;
+  color: #e0e0e0;                               /* Texto claro */
+}
+
+/* Iconos dentro de la card */
+.search-card ion-icon {
+  font-size: 1.2rem;
+  color: #9a9a9a;                                /* Gris claro para contraste */
+}
+
+/* Inputs dentro de la card */
+.search-card ion-input {
+  font-size: 16px;
+  color: #e0e0e0;                               /* Texto de input claro */
+}
+
+/* Botones con fill="clear" dentro de la card (por ejemplo, ícono de borrar texto) */
+.search-card ion-button[fill="clear"] ion-icon {
+  font-size: 1rem;
+  color: #bbbbbb;                               /* Gris medio */
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  .search-card ion-card-content {
+    padding: 12px;
+  }
+}
+
+/* -------------------------------------------
+   4. Bienvenido + Logo + Slogan
+   ------------------------------------------- */
+.welcome-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.welcome-text {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.app-logo {
+  display: block;
+  margin: 12px auto;
+  max-width: 120px;
+  height: auto;
+}
+
+.slogan-text {
+  color: #bbbbbb;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* -------------------------------------------
+   5. Estilos para el botón de “Iniciar Sesión”
+   ------------------------------------------- */
+.login-button {
+  --border-radius: 8px;
+  font-weight: 600;
+}
+
+/* -------------------------------------------
+   6. Estilos para el enlace “¿Olvidaste tu contraseña?”
+   ------------------------------------------- */
+.forgot-password-container {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.forgot-password-link {
+  color: var(--ion-color-primary);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------
+   7. Estilos para el enlace “Regístrate aquí”
+   ------------------------------------------- */
+.link-container {
+  text-align: center;
+  margin: 12px 0;
+}
+
+.link-action {
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-action:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------
+   8. Forzar modo oscuro en esta página
+   ------------------------------------------- */
+:host {
+  --ion-background-color: #121212;
+  --ion-text-color: #ffffff;
+}

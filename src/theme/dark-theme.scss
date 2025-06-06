@@ -1,0 +1,984 @@
+// profile-settings
+.perfil-container {
+  --background: #1e1e1e; /* Fondo oscuro general */
+}
+
+ion-card {
+  background: #2c2c2e; /* Fondo de tarjeta oscuro */
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+ion-card-header {
+  background: rgba(44, 44, 46, 0.85); /* Cabecera ligeramente translúcida */
+  border-bottom: 1px solid #3a3a3c;    /* Borde oscuro */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff; /* Texto claro */
+}
+
+.profile-pic-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ion-color-primary); /* El color primario se puede mantener */
+}
+
+.btn-edit {
+  --border-radius: 8px;
+  --border-color: var(--ion-color-primary);
+  --color: var(--ion-color-primary);
+  margin-top: 1rem;
+  background: transparent; /* Botón sobre fondo oscuro */
+}
+
+ion-item {
+  --min-height: 50px;
+  background: transparent; /* Fondo transparente para que se vea el fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+  --ion-item-background: transparent;
+}
+
+ion-item ion-icon {
+  font-size: 1.4rem;
+  color: #9a9a9a; /* Iconos en un gris claro */
+}
+
+ion-toggle {
+  --handle-background: var(--ion-color-primary);
+  --background: #3a3a3c; /* Fondo del toggle en un gris oscuro */
+}
+
+/* Si necesitas cambiar también el color del texto dentro de ion-item */
+ion-item .item-inner {
+  color: #e0e0e0;
+}
+
+// Estilos sobre la lista
+ion-list {
+  background: #2c2c2e;           /* Mismo gris oscuro que los ion-card */
+  border-radius: 12px;          /* Bordes suaves para que combine */
+  margin: 1rem 0;               /* Separación vertical */
+  padding: 0.5rem 0;            /* Un poco de espacio interno */
+}
+
+ion-list ion-item {
+  background: transparent;      /* Dejar el fondo transparente para que se vea el ion-list */
+  color: #e0e0e0;               /* Texto claro */
+  border-bottom: 1px solid #3a3a3c; /* Línea divisoria oscura */
+  --ion-item-background: transparent;
+}
+
+ion-list ion-item:last-child {
+  border-bottom: none;          /* Quitar la línea del último ítem */
+}
+
+ion-list ion-item ion-icon {
+  color: #9a9a9a;               /* Iconos en gris claro */
+}
+
+/* Si quieres un poco de separación entre ítems y bordes internos: */
+ion-list {
+  --inner-border-width: 0;      /* Quitar bordes por defecto si aparecen */
+}
+// end
+
+
+// trip-settings
+/* ========================================
+   0. Clases generales
+   ======================================== */
+
+/* Ion-padding: fondo oscuro uniforme */
+.ion-padding {
+  --background: #1e1e1e;
+}
+
+/* Ion-badge: resalta sobre fondos oscuros */
+ion-badge {
+  margin-top: -10px;
+  margin-left: -8px;
+  --background: var(--ion-color-primary);
+  color: #ffffff;
+}
+
+/* ========================================
+   1. Segmento “Simple / Multiple”
+   ======================================== */
+
+/* Fondo general del wrapper de segmentos */
+.segment-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  background: #2c2c2e;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Contenedor de ion-segment */
+.simple-segment {
+  --background: transparent;        /* Para que se vea el fondo del wrapper */
+  --indicator-color: var(--ion-color-primary);
+  --indicator-height: 3px;
+  --border-radius: 8px;
+  padding: 0;
+}
+
+/* Botones del segmento (no seleccionados) */
+.simple-segment ion-segment-button {
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  --color: var(--ion-color-primary);
+  --background: transparent;
+}
+
+/* Botón seleccionado (aria-checked="true") */
+.simple-segment ion-segment-button[aria-checked="true"] {
+  --background: var(--ion-color-primary-tint);
+  --color: var(--ion-color-primary-contrast);
+}
+
+/* ========================================
+   2. Buscador (search-wrapper + search-card)
+   ======================================== */
+
+/* Wrapper general para posicionar el buscador */
+.search-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 90%, 500px);
+  z-index: 1000;
+  pointer-events: auto;
+  margin: 20px 0;
+}
+
+/* Card principal del buscador */
+.search-wrapper > ion-card.search-card {
+  margin: 0;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Estilos de la card del buscador */
+.search-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;
+}
+
+/* Contenido interno de la card */
+.search-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  color: #e0e0e0;
+}
+
+/* Ítems de ubicación/destino */
+.search-card .location-item,
+.search-card .destination-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e0e0e0;
+}
+
+/* Iconos dentro de la card */
+.search-card ion-icon {
+  font-size: 1.2rem;
+  color: #9a9a9a;
+}
+
+/* Inputs dentro de la card */
+.search-card ion-input {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* Botones claros dentro de la card (por ejemplo, para cerrar) */
+.search-card ion-button[fill="clear"] ion-icon {
+  font-size: 1rem;
+  color: #bbbbbb;
+}
+
+/* Sección de viajes frecuentes dentro de la card (si aplica) */
+.search-card .frequent-section {
+  margin-top: 20px;
+}
+.search-card .frequent-section h6 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #bbbbbb;
+  font-weight: 600;
+}
+
+/* Lista de resultados dentro de la card */
+.search-card ion-list {
+  max-height: 140px;
+  overflow-y: auto;
+  background: transparent;
+}
+
+/* Ítems dentro de la lista de la card */
+.search-card ion-item {
+  --min-height: 44px;
+  background: transparent;
+  color: #e0e0e0;
+  border-radius: 8px;
+  --ion-item-background: transparent;
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  .search-card ion-card-content {
+    padding: 12px;
+  }
+}
+
+/* Fondo semitransparente detrás del buscador */
+.search-wrapper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Botón "Confirmar" dentro de la card */
+.search-card ion-button.confirmar {
+  --background: var(--ion-color-primary);
+  --color: #ffffff;
+  margin: 12px 0;
+}
+
+/* ========================================
+   3. Sección “Viajes Frecuentes”
+   ======================================== */
+
+/* Contenedor general de la sección */
+.frequent-trips-container {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Título “Viajes Frecuentes” */
+.frequent-trips-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #bbbbbb;
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+/* Lista de viajes frecuentes */
+.trip-list {
+  margin-top: 24px;
+  background-color: transparent;
+}
+
+/* Tarjeta individual de cada viaje frecuente */
+.trip-item {
+  --min-height: 72px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: #2c2c2e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+.trip-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Icono en la tarjeta de viaje */
+.trip-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary) !important;
+}
+
+/* Información principal del viaje (título) */
+.trip-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Descripción secundaria del viaje */
+.trip-info p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: #bbbbbb;
+}
+
+/* Metadatos (precio/distancia) */
+.trip-meta {
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.trip-meta h2 {
+  margin: 0;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.trip-meta p {
+  margin: 2px 0 0;
+  color: #bbbbbb;
+}
+
+/* Botones de acción (Editar/Eliminar) */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-edit,
+.btn-delete {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  --ion-color-ripple: transparent;
+  color: var(--ion-color-primary);
+  background: transparent;
+}
+
+/* ========================================
+   4. Modal y tarjetas modales
+   ======================================== */
+
+/* Fondo semitransparente del modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* Card principal del modal */
+.modal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 360px;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 20;
+  background: #2c2c2e;
+  color: #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Ícono de cerrar modal */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #bbbbbb;
+}
+
+/* Ítems dentro del formulario del modal */
+.modal-form ion-item {
+  margin-top: 12px;
+  --inner-padding-end: 12px;
+  --background: transparent;
+  --ion-item-background: transparent;
+  color: #e0e0e0;
+}
+
+/* Acciones (botones) al pie del modal */
+.modal-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ========================================
+   5. Ajustes de ion-list extra
+   ======================================== */
+
+/* Ion-list con fondo oscuro uniforme */
+ion-list {
+  background: #2c2c2e;
+  border-radius: 12px;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+ion-list ion-item {
+  background: transparent;
+  color: #e0e0e0;
+  --ion-item-background: transparent;
+  border-bottom: 1px solid #3a3a3c;
+}
+
+ion-list ion-item:last-child {
+  border-bottom: none;
+}
+
+ion-list ion-item ion-icon {
+  color: #9a9a9a;
+}
+
+/* ========================================
+   6. Notas extra
+   ======================================== */
+
+/* Si agregas más componentes a esta vista, asegúrate de:
+   - Darles fondo #2c2c2e o transparente sobre el fondo oscuro
+   - Usar colores de texto claros (#e0e0e0, #bbbbbb, #ffffff)
+   - Bordes (si existen) con tonos de gris oscuro (p. ej. rgba(255,255,255,0.1) o #3a3a3c)
+*/
+
+// end
+
+
+
+
+// Home page
+/* ========================================
+   1. Wrapper del mapa
+   ======================================== */
+.map-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+/* ========================================
+   2. Wrapper de búsqueda
+   ======================================== */
+.search-wrapper {
+  position: absolute;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0; */
+  display: flex;
+  justify-content: center;     /* centrar horizontal */
+  align-items: center;         /* centrar vertical */
+  z-index: 100;
+  pointer-events: none;        /* deja pasar todos los eventos al mapa */
+  transition: opacity 400ms ease, transform 500ms ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Card dentro del wrapper de búsqueda */
+.search-wrapper > ion-card {
+  pointer-events: auto;        /* la card vuelve a capturar clicks y gestos */
+  width: clamp(300px, 90%, 500px);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);  /* Fondo oscuro semitransparente */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Estado oculto: se aplica cuando .hidden está presente */
+.search-wrapper.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;         /* para que los clics/touches pasen por debajo */
+}
+
+/* ========================================
+   3. Contenido interno de la card de búsqueda
+   ======================================== */
+.search-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);  /* Fondo oscuro semitransparente */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Botón que aparece sobre el mapa (dentro de la card) */
+.search-card .map-button {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue sobre oscuro */
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;              /* Para que los clicks funcionen en el botón */
+}
+
+.search-card .map-button ion-icon {
+  font-size: 1.2rem;
+  color: #e0e0e0;                     /* Icono en color claro */
+}
+
+.search-card .map-button ion-label {
+  font-size: 16px;
+  color: #e0e0e0;                     /* Texto claro */
+}
+
+/* Contenido del ion-card */
+.search-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ítems de ubicación/destino dentro de la card */
+.search-card .location-item,
+.search-card .destination-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue */
+  border-radius: 8px;
+  color: #e0e0e0;                               /* Texto claro */
+}
+
+/* Iconos dentro de la card */
+.search-card ion-icon {
+  font-size: 1.2rem;
+  color: #9a9a9a;                                /* Gris claro para contraste */
+}
+
+/* Inputs dentro de la card */
+.search-card ion-input {
+  font-size: 16px;
+  color: #e0e0e0;                               /* Texto de input claro */
+}
+
+/* Botones con fill="clear" dentro de la card (por ejemplo, ícono de borrar texto) */
+.search-card ion-button[fill="clear"] ion-icon {
+  font-size: 1rem;
+  color: #bbbbbb;                               /* Gris medio */
+}
+
+/* Sección de viajes frecuentes dentro de la card (si aplica) */
+.search-card .frequent-section {
+  margin-top: 20px;
+}
+
+.search-card .frequent-section h6 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #bbbbbb;                               /* Gris medio */
+  font-weight: 600;
+}
+
+/* Lista de resultados (ion-list) dentro de la card */
+.search-card ion-list {
+  max-height: 140px;
+  overflow-y: auto;
+  background: transparent;
+}
+
+/* Ítems dentro de la lista de la card */
+.search-card ion-item {
+  --min-height: 44px;
+  background: transparent;
+  color: #e0e0e0;                              /* Texto claro */
+  border-radius: 8px;
+  --ion-item-background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Eliminar línea divisoria del último ítem */
+.search-card ion-item:last-child {
+  border-bottom: none;
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  .search-card ion-card-content {
+    padding: 12px;
+  }
+}
+
+/* ========================================
+   4. FAB “Viajar”
+   ======================================== */
+.fab-travel {
+  position: fixed;                               /* Empleado sobre todo */
+  bottom: env(safe-area-inset-bottom, 4px);       /* Se adapta a pantallas con notch */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  padding: 0.6em 1em;
+  background: var(--ion-color-primary);           /* Mantener color primario para destacar */
+  color: #ffffff;                                 /* Texto claro */
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);       /* Sombra más intensa en modo oscuro */
+  cursor: pointer;
+  animation: float 2s ease-in-out infinite;
+  transition: background 200ms;
+  z-index: 999;                                   /* Por encima de todo */
+  pointer-events: auto;
+}
+
+.fab-travel ion-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5em;
+  color: #ffffff;                                 /* Icono en blanco */
+}
+
+/* Animación de flotación */
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+// end
+
+
+
+
+
+/* home.component.scss (Modo Oscuro) */
+
+.modal-header {
+  --background: #2c2c2e;  /* Fondo oscuro */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top); /* para iOS */
+
+  .handle-bar {
+    width: 36px;
+    height: 4px;
+    background-color: #555;       /* Gris medio para contraste */
+    border-radius: 2px;
+    margin: 8px auto 4px auto;
+  }
+
+  ion-toolbar {
+    --background: transparent;
+    --padding-top: 0;
+    --min-height: 44px;
+
+    ion-title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #bbbbbb;             /* Texto gris claro */
+    }
+  }
+}
+
+.drag-handle {
+  width: 45px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparente sobre fondo oscuro */
+  border-radius: 3px;
+  margin: 10px auto;
+}
+
+.driver-card {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7); /* Sombra más intensa */
+  --ion-card-background: #2c2c2e;            /* Fondo oscuro para la card */
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
+  }
+
+  ion-card-title {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #e0e0e0;                           /* Texto blanco sobre fondo oscuro */
+  }
+
+  .vehicle-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #bbbbbb;                          /* Texto gris claro */
+    margin-top: 4px;
+    padding: 0 8px;
+
+    ion-card-subtitle {
+      margin: 0;
+      color: #bbbbbb;
+    }
+
+    .vehicle-color-name {
+      font-weight: 500;
+      text-transform: capitalize;
+      color: #e0e0e0;                        /* Color del texto más destacado */
+    }
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6px 0;
+    gap: 4px;
+
+    ion-icon {
+      color: #f5a623;                       /* Mantener dorado para estrellas */
+    }
+
+    .rating {
+      font-size: 14px;
+      color: #cccccc;                       /* Gris claro para la calificación */
+    }
+  }
+
+  ion-card-content {
+    padding: 16px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #bbbbbb;                         /* Texto gris claro */
+    margin-bottom: 12px;
+
+    ion-icon {
+      font-size: 18px;
+      color: var(--ion-color-primary);      /* Icono en color primario (ej. rojo) */
+    }
+  }
+
+  .button-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+
+    ion-button {
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      height: 48px;
+      --box-shadow: none;
+      --border-radius: 12px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      text-transform: none;
+
+      ion-icon {
+        font-size: 20px;
+        margin-right: 6px;
+        color: #ffffff;
+      }
+    }
+
+    ion-button[color="primary"] {
+      --background: #e53935;                /* Rojo intenso */
+      --background-activated: #c62828;       /* Rojo más oscuro al presionar */
+      --color: #ffffff;                      /* Texto en blanco */
+    }
+
+    ion-button[color="secondary"] {
+      --background: #3a3a3c;                 /* Gris oscuro para contraste */
+      --background-activated: #5a5a5c;       /* Gris ligeramente más claro al presionar */
+      --color: #e0e0e0;                      /* Texto gris claro */
+    }
+  }
+}
+// end
+
+
+
+// Trip Detail Component
+/* ========================================
+   1. Encabezado con degradado
+   ======================================== */
+.header-gradient {
+  /* Cambio a un degradado oscuro */
+  --background: linear-gradient(135deg, #1f2733, #2c3440);
+
+  ion-title {
+    color: #e0e0e0;         /* Texto claro */
+    font-weight: 600;
+  }
+}
+
+/* ========================================
+   2. Drag Handle (asa deslizante)
+   ======================================== */
+.drag-handle {
+  width: 45px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);  /* Más tenue sobre fondo oscuro */
+  border-radius: 3px;
+  margin: 10px auto;
+}
+
+/* ========================================
+   3. Fondo de contenido genérico
+   ======================================== */
+.content-bg {
+  --background: #1e1e1e;     /* Fondo oscuro uniforme */
+  padding: 0 16px;
+}
+
+/* ========================================
+   4. Segmento dentro de una tarjeta (card-segment)
+   ======================================== */
+.card-segment {
+  margin: 16px 15px;
+  --box-shadow: none;
+
+  ion-segment {
+    background: #2c2c2e;       /* Fondo oscuro para el segmento */
+    --indicator-color: #ff6f61; /* Mantiene indicador en rojo */
+    --indicator-height: 4px;
+
+    ion-segment-button {
+      --color: #bbbbbb;         /* Texto gris claro en no seleccionado */
+      --color-checked: #ff6f61; /* Texto rojo cuando está activo */
+      font-weight: 500;
+      text-transform: capitalize;
+      padding: 8px 20px;
+
+      ion-icon {
+        margin-right: 4px;
+        color: #bbbbbb;         /* Icono gris claro cuando no está activo */
+      }
+    }
+
+    /* Botón seleccionado (checked) */
+    ion-segment-button[aria-checked="true"] {
+      --background: rgba(255, 111, 97, 0.1); /* Fondo rojo claro semitransparente */
+      ion-icon {
+        color: #ff6f61;       /* Icono en rojo cuando está activo */
+      }
+    }
+  }
+}
+
+/* ========================================
+   5. Tarjeta de ruta (card-route)
+   ======================================== */
+.card-route {
+  padding: 16px;
+  border-radius: 14px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  background: #2c2c2e;       /* Fondo oscuro sólido */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .route-points {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .point {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      color: #e0e0e0;       /* Texto claro */
+
+      ion-icon {
+        font-size: 20px;
+        color: #ff6f61;     /* Ícono de punto en rojo */
+      }
+    }
+
+    .divider-icon {
+      font-size: 18px;
+      color: #555;         /* Gris medio */
+    }
+  }
+
+  .route-meta {
+    display: flex;
+    justify-content: space-between;
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #bbbbbb;     /* Texto gris claro */
+
+      ion-icon {
+        font-size: 18px;
+        color: #bbbbbb;   /* Ícono en gris claro */
+      }
+    }
+  }
+}
+
+/* ========================================
+   6. Acciones (botones de Confirmar/Cancelar)
+   ======================================== */
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin: 16px 15px;
+
+  .btn-confirm {
+    flex: 1;
+    --background: var(--ion-color-primary);  /* Mantiene color primario (rojo intenso) */
+    --border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffffff;                          /* Texto en blanco */
+  }
+
+  .btn-cancel {
+    flex: 1;
+    --background: transparent;
+    --border-radius: 8px;
+    font-weight: 500;
+    --color: #ff6f61;                        /* Texto en rojo para cancelar */
+    border: 1px solid #ff6f61;               /* Borde rojo para contraste */
+  }
+}
+// end

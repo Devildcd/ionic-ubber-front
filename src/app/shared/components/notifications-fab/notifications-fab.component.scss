@@ -1,0 +1,74 @@
+/* ------------------------------------------------------------
+  1) FAB de notificaciones en modo oscuro
+------------------------------------------------------------ */
+.notif-fab {
+  --background: #e2e0e0;     /* Fondo oscuro para el FAB */
+  --box-shadow: none;
+  color: #FFFFFF;            /* Icono en blanco para contraste */
+  position: relative;
+}
+
+/* ------------------------------------------------------------
+  2) Badge de notificaciones (círculo con número) 
+     ---------------------------------------------------------
+     Ajustamos color de fondo y texto para que contrasten 
+     con el FAB oscuro.
+------------------------------------------------------------ */
+.notif-badge {
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  font-size: 0.65rem;
+  line-height: 1;
+  min-width: 1.4em;
+  height: 1.4em;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: var(--ion-color-primary); /* Ejemplo: color primario sobre oscuro */
+  color: #FFFFFF;                              /* Texto blanco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Popover */
+.notif-popover {
+  --width: 280px;
+}
+
+.notif-content {
+  max-height: 320px;
+}
+
+ion-item {
+  --inner-padding-start: 12px;
+  --inner-padding-end: 8px;
+  --min-height: 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+ion-item.unread {
+  --background: #f0f8ff;
+}
+
+ion-item h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+ion-item p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+ion-item small {
+  color: #888;
+}
+
+ion-item ion-button {
+  --padding: 0;
+}
+

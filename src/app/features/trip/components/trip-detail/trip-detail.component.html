@@ -1,0 +1,52 @@
+<ion-header translucent class="header-gradient">
+  <div class="drag-handle"></div>
+  <ion-toolbar>
+    <ion-title class="ion-title-text">Detalles de tu viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-bg">
+  <ion-card class="card-segment">
+    <ion-segment [(ngModel)]="tripType">
+      <ion-segment-button value="normal">
+        <ion-icon name="walk-outline"></ion-icon>
+        <ion-label>Normal</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="confort">
+        <ion-icon name="star-outline"></ion-icon>
+        <ion-label>Confort</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-card class="card-route">
+    <div class="route-points">
+      <div class="point">
+        <ion-icon name="locate-outline"></ion-icon>
+        <span>Parque Central</span>
+      </div>
+      <ion-icon class="divider-icon" name="ellipsis-vertical-outline"></ion-icon>
+      <div class="point">
+        <ion-icon name="flag-outline"></ion-icon>
+        <span>Museo de Arte</span>
+      </div>
+    </div>
+    <div class="route-meta">
+      <div class="meta-item">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>4,8 km • 12 min</span>
+      </div>
+      <div class="meta-item">
+        <ion-icon name="cash-outline"></ion-icon>
+        <span>$15.00</span>
+      </div>
+    </div>
+  </ion-card>
+
+  <!-- Acciones -->
+  <div class="actions">
+    <ion-button id="open-loading" expand="block" class="btn-confirm" (click)="openDriverModal()">Confirmar</ion-button>
+    <ion-loading trigger="open-loading" message="Procesando..." [duration]="3000" spinner="circles"></ion-loading>
+    <ion-button expand="block" fill="clear" class="btn-cancel">Cancelar</ion-button>
+  </div>
+</ion-content>

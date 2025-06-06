@@ -1,0 +1,492 @@
+/* Variables globales de color */
+:root {
+  --ion-color-primary:    #D32F2F;  /* Rojo primario */
+  --ion-color-primary-rgb: 211,47,47;
+  --ion-color-secondary:  #FFC107;  /* Amarillo dorado */
+  --ion-color-secondary-rgb: 255,193,7;
+
+  /* Tonos grises y neutros */
+  --ion-color-tertiary:   #F5F5F5;  /* Gris claro como terciario */
+  --ion-color-tertiary-rgb: 245,245,245;
+  --ion-color-dark:       #1e1e1e;  /* Negro para textos fuertes */
+  --ion-color-medium:     #757575;  /* Gris oscuro para detalles */
+
+  /* Textos */
+  --ion-text-color:       var(--ion-color-dark);
+  --ion-text-color-secondary: var(--ion-color-medium);
+
+  /* Fondo global */
+  --ion-background-color: var(--ion-color-tertiary);
+}
+
+/* 1. Estilo general para el ion-header */
+ion-header {
+  /* Fondo oscuro para todo el header */
+  background: #1e1e1e;
+  /* Si en variables.scss definiste: --color-border-dark: #3a3a3c; */
+  --border-color: #3a3a3c; /* para una posible línea en el toolbar */
+
+  /* 2. Primer toolbar (puede estar vacío o con botones) */
+  ion-toolbar:first-of-type {
+    /* Si no necesitas borde inferior aquí, basta el fondo */
+    --background: #1e1e1e;     /* gris oscuro uniforme */
+    --color: #e0e0e0;           /* texto claro por defecto */
+    border-bottom: 1px solid #1e1e1e; /* línea sutil para separar herramientas */
+
+    /* Mejora: transición suave para cambios de color */
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* 3. Segundo toolbar, donde está el título */
+  ion-toolbar:nth-of-type(2) {
+    --background: #1e1e1e;   /* mismo gris oscuro */
+    --color: #ffffff;         /* título en blanco para máxima legibilidad */
+    border-bottom: 1px solid #3a3a3c; /* separación de la parte de contenido */
+
+    /* Mejora: alineación y espacio más consistente */
+    padding: 0 16px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* 4. Asegurar que el título (ion-title) se vea bien */
+ion-title {
+  /* Si quieres centrarlo y con fuente clara */
+  color: #ffffff;
+  font-weight: 600;      /* opcional, si lo quieres un poco más destacado */
+  font-size: 1.25rem;    /* ligeramente mayor para legibilidad */
+  text-align: center;
+  flex: 1;
+}
+
+/* 5. Si hay botones o íconos en el toolbar, que también sean claros */
+ion-toolbar ion-button,
+ion-toolbar ion-icon {
+  color: #e0e0e0;
+  transition: color 0.2s ease;
+}
+ion-toolbar ion-button:hover,
+ion-toolbar ion-button:focus,
+ion-toolbar ion-icon:hover,
+ion-toolbar ion-icon:focus {
+  color: #ffffff;
+}
+
+/* Ajustes generales: márgenes horizontales para todas las cards */
+ion-card {
+  margin: 0.5rem 1rem; /* margen arriba/abajo 0.5rem, izquierda/derecha 1rem */
+}
+
+/* SCSS para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  /* Contenedor principal */
+  ion-content.historial-content {
+    --background: #121212;
+    background-color: var(--background);
+    color: #E0E0E0;
+  }
+
+  /* Toolbars */
+  ion-toolbar {
+    --background: #1F1F1F;
+    --color: #E0E0E0;
+  }
+
+  /* Título centrado */
+  ion-title.ion-text-center {
+    color: #FFFFFF;
+  }
+
+  /* Segmentos (principal y filtros) */
+  .simple-segment {
+    margin-top: 20px;
+  }
+
+  .simple-segment,
+  .filter-segment {
+    --background: #1F1F1F;
+    --color: #E0E0E0;
+    --indicator-background: var(--ion-color-primary);
+  }
+
+  .simple-segment ion-segment-button,
+  .filter-segment ion-segment-button {
+    --color-checked: var(--ion-color-primary);
+    --color: #B0B0B0;
+     transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* Controles de historial (div con filtros y botón) */
+  .history-controls {
+    background-color: transparent;
+    padding: 0.5rem;
+    margin-top: 10px;
+  }
+
+  .history-controls ion-button {
+    --background: transparent;
+    --color: #E0E0E0;
+  }
+
+  .filter-container {
+    flex: 1;
+  }
+
+  /* Listas de historial y tarjetas (ahora con margen lateral aplicado arriba) */
+  ion-list.historial-list,
+  ion-list.rating-history-list {
+    background-color: transparent;
+  }
+
+  ion-card {
+    --background: #2c2c2e;
+    border-radius: 0.5rem;
+    box-shadow: none;
+    border: 1px solid #2A2A2A;
+    /* El margin para izquierda y derecha ya está fuera del media query */
+  }
+
+  /* Encabezado de tarjeta (fecha + badge) */
+  .trip-card-compact {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .card-header-compact,
+.rating-card-header {
+  position: relative;  /* necesario para que el badge se posicione respecto a este contenedor */
+  display: flex;
+  align-items: center;
+  background-color: #1F1F1F;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+
+/* Ajustes al contenedor izquierdo (fecha + icono) */
+.card-header-compact .left-row,
+.rating-card-header .header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Iconos de fecha en el header: color primario */
+.card-header-compact ion-icon.icon-small,
+.rating-card-header ion-icon.icon-date {
+  color: var(--ion-color-primary);
+}
+
+/* Margen superior para alinear texto/icono */
+.text-small,
+.icon-small {
+  margin-top: 5px;
+}
+
+/* Título de fecha */
+.card-header-compact ion-card-title.text-small,
+.rating-card-header ion-card-title.text-date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #E0E0E0;
+  margin-left: 0.5rem;
+}
+
+/* Badge de calificación: ahora posicionado en la esquina superior derecha */
+.rating-badge-compact {
+  position: absolute;
+  top: 0.5rem;       /* ajusta para ubicar verticalmente */
+  right: 1rem;       /* coincide con el padding del header */
+  background-color: var(--ion-color-secondary);
+  color: #FFFFFF;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Icono y texto dentro del badge */
+.rating-badge-compact ion-icon {
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+
+.badge-text-small {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+  /* Contenido de tarjeta (origen-destino, meta, tiempos) */
+  .card-content-compact {
+    background-color: #1E1E1E;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .route-vertical {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+
+  .loc-block {
+    display: flex;
+    align-items: center;
+    margin: 0.2rem 0;
+  }
+
+  /* Iconos de ubicación: color secundario */
+  .loc-block ion-icon.icon-small {
+    color: var(--ion-color-primary);
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .loc-block .text-small {
+    font-size: 0.9rem;
+    color: #E0E0E0;
+  }
+
+  .meta-time-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .meta-inline,
+  .time-inline {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Iconos de distancia/precio/tiempos: color secundario */
+  .meta-inline ion-icon,
+  .time-inline ion-icon {
+    color: var(--ion-color-secondary);
+    margin-right: 0.3rem;
+    font-size: 1rem;
+  }
+
+  .meta-inline .text-small,
+  .time-inline .text-small {
+    font-size: 0.85rem;
+    color: #E0E0E0;
+  }
+
+  /* Botón eliminar dentro de tarjeta */
+  .btn-delete-compact {
+    align-self: flex-end;
+    --color: #CF6679; /* rojo suave para eliminar */
+  }
+
+  .btn-delete-compact ion-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Mensaje "no hay viajes" o "no hay calificaciones" */
+  .no-data {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #B0B0B0;
+  }
+
+  .no-data-icon {
+    font-size: 2rem;
+    color: #777777;
+    margin-bottom: 0.5rem;
+  }
+
+  .no-data p {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+/* ------------------------------------------------------------
+  1) Estilos generales para cada tarjeta de calificación
+------------------------------------------------------------ */
+.rating-card {
+  --background: #1E1E1E;
+  margin-bottom: 20px;            /* espacio de 20px entre cada tarjeta */
+  border-radius: 0.5rem;          /* opcional: bordes redondeados */
+  overflow: hidden;               /* para que no desborde nada */
+}
+
+/* ------------------------------------------------------------
+  2) Header de la tarjeta: solo fecha
+------------------------------------------------------------ */
+.rating-card-header {
+  display: flex;
+  align-items: center;
+  background-color: #1E1E1E;
+  padding: 0.75rem 1rem;          /* un padding cómodo alrededor de la fecha */
+  border-bottom: 1px solid #2A2A2A;
+}
+
+/* Contenedor izquierdo (icono + fecha) */
+.rating-card-header .header-left {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;            /* evitar que la fecha rompa línea */
+}
+
+.rating-card-header ion-icon.icon-date {
+  color: var(--ion-color-primary);
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.rating-card-header ion-card-title.text-date {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #E0E0E0;
+}
+
+/* ------------------------------------------------------------
+  3) Contenido de calificación: estrellas y comentario
+------------------------------------------------------------ */
+.rating-card-content {
+  background-color: #1E1E1E;
+  padding: 0.75rem 1rem;
+}
+
+/* Fila de estrellas + valor numérico */
+.stars-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.stars-row ion-icon.icon-star {
+  color: var(--ion-color-secondary); /* amarillo dorado */
+  font-size: 1.1rem;
+  margin-right: 0.2rem;
+}
+
+.rating-value {
+  font-size: 0.9rem;
+  color: #E0E0E0;
+  margin-left: 0.5rem;
+}
+
+/* Bloque de comentario */
+.comment-block p {
+  font-size: 0.9rem;
+  color: #D0D0D0;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------
+  4) Botones de acción (Editar y Eliminar) debajo del contenido
+------------------------------------------------------------ */
+.rating-actions {
+  display: flex;
+  justify-content: flex-end;        /* alinearlos al extremo derecho */
+  background-color: #1E1E1E;
+  padding: 0.5rem 1rem;             /* mismo padding horizontal que el content */
+  border-top: 1px solid #2A2A2A;
+}
+
+/* Separación entre botones dentro de rating-actions */
+.rating-actions ion-button {
+  margin-left: 0.75rem;
+}
+
+/* Iconos de Editar y Eliminar */
+.btn-edit ion-icon,
+.btn-delete ion-icon {
+  font-size: 1.3rem;
+}
+
+/* Color del ícono “Editar” */
+.btn-edit {
+  --color: var(--ion-color-secondary);
+}
+
+/* Color del ícono “Eliminar” */
+.btn-delete {
+  --color: #CF6679;
+}
+}
+
+
+
+
+
+
+/* Contenedor de paginación y botón */
+.paginator-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem 0 1rem;
+}
+
+/* Controles de paginación */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-prev,
+.btn-next {
+  --color: var(--ion-color-dark);
+  --background: transparent;
+}
+
+.page-indicator {
+  font-size: 0.9rem;
+  color: var(--ion-text-color);
+}
+
+/* Botón "Borrar historial" */
+.btn-delete-history {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  --color: var(--ion-color-primary);
+  --background: transparent;
+}
+
+.delete-text {
+  font-size: 0.9rem;
+}
+
+/* Márgenes horizontales para todas las cards (igual que antes) */
+ion-card {
+  margin: 0.5rem 1rem;
+}
+
+/* SCSS modo oscuro (mantiene la estructura anterior, ajustando solo colores si es necesario) */
+@media (prefers-color-scheme: dark) {
+  /* Paginador y botón navegador en modo oscuro */
+  .paginator-container {
+    margin: 1rem 1rem 0 1rem;
+  }
+
+  .btn-prev,
+  .btn-next {
+    --color: #E0E0E0;
+  }
+
+  .page-indicator {
+    color: #E0E0E0;
+  }
+
+  .btn-delete-history {
+    --color: var(--ion-color-primary);
+  }
+
+  .delete-text {
+    color: #E0E0E0;
+  }
+
+  /* Resto de estilos oscuros para cards y contenido mantenidos igual que en SCSS anterior */
+}
+

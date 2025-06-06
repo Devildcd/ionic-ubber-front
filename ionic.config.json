@@ -1,0 +1,8 @@
+{
+  "name": "uber-app-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "f74d81db"
+}

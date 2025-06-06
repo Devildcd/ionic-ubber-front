@@ -1,0 +1,45 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+/* src/theme/variables.scss */
+:root {
+  /* 1. Primarios y acentos */
+  --ion-color-primary:    #D32F2F;  /* Rojo primario */
+  --ion-color-primary-rgb: 211,47,47;
+  --ion-color-secondary:  #FFC107;  /* Amarillo dorado */
+  --ion-color-secondary-rgb: 255,193,7;
+
+  /* 2. Tonos grises y neutros */
+  --ion-color-tertiary:   #F5F5F5;  /* Gris claro como terciario */
+  --ion-color-tertiary-rgb: 245,245,245;
+  --ion-color-dark:       #212121;  /* Negro para textos fuertes */
+  --ion-color-medium:     #757575;  /* Gris oscuro para detalles */
+
+  /* 3. Textos */
+  --ion-text-color:       var(--ion-color-dark);
+  --ion-text-color-secondary: var(--ion-color-medium);
+
+  /* 4. Fondo global */
+  --ion-background-color: var(--ion-color-tertiary);
+}
+
+
+body.dark {
+  /* 1. Primarios y acentos (pueden mantenerse o suavizarse) */
+  --ion-color-primary: #EF5350; /* Rojo más claro para mejor contraste en fondo oscuro */
+  --ion-color-primary-rgb: 239,83,80;
+  --ion-color-secondary: #FFD54F; /* Amarillo más suave */
+  --ion-color-secondary-rgb: 255,213,79;
+
+  /* 2. Tonos grises y neutros */
+  --ion-color-tertiary: #1E1E1E; /* Fondo oscuro terciario */
+  --ion-color-tertiary-rgb: 30,30,30;
+  --ion-color-dark: #FAFAFA;     /* Texto fuerte ahora claro */
+  --ion-color-medium: #B0BEC5;   /* Gris claro para detalles */
+
+  /* 3. Textos */
+  --ion-text-color: var(--ion-color-dark);        /* Blanco para textos */
+  --ion-text-color-secondary: var(--ion-color-medium);
+
+  /* 4. Fondo global */
+  --ion-background-color: var(--ion-color-tertiary);
+}

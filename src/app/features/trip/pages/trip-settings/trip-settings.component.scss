@@ -1,0 +1,439 @@
+/* ========================================
+   0. Clases generales
+   ======================================== */
+
+/* 1. Estilo general para el ion-header */
+ion-header {
+  /* Fondo oscuro para todo el header */
+  background: #1e1e1e;
+  /* Si en variables.scss definiste: --color-border-dark: #3a3a3c; */
+  --border-color: #3a3a3c; /* para una posible línea en el toolbar */
+
+  /* 2. Primer toolbar (puede estar vacío o con botones) */
+  ion-toolbar:first-of-type {
+    /* Si no necesitas borde inferior aquí, basta el fondo */
+    --background: #1e1e1e;     /* gris oscuro uniforme */
+    --color: #e0e0e0;           /* texto claro por defecto */
+    border-bottom: 1px solid #1e1e1e; /* línea sutil para separar herramientas */
+
+    /* Mejora: transición suave para cambios de color */
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* 3. Segundo toolbar, donde está el título */
+  ion-toolbar:nth-of-type(2) {
+    --background: #1e1e1e;   /* mismo gris oscuro */
+    --color: #ffffff;         /* título en blanco para máxima legibilidad */
+    border-bottom: 1px solid #3a3a3c; /* separación de la parte de contenido */
+
+    /* Mejora: alineación y espacio más consistente */
+    padding: 0 16px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* 4. Asegurar que el título (ion-title) se vea bien */
+ion-title {
+  /* Si quieres centrarlo y con fuente clara */
+  color: #ffffff;
+  font-weight: 600;      /* opcional, si lo quieres un poco más destacado */
+  font-size: 1.25rem;    /* ligeramente mayor para legibilidad */
+  text-align: center;
+  flex: 1;
+}
+
+/* 5. Si hay botones o íconos en el toolbar, que también sean claros */
+ion-toolbar ion-button,
+ion-toolbar ion-icon {
+  color: #e0e0e0;
+  transition: color 0.2s ease;
+}
+ion-toolbar ion-button:hover,
+ion-toolbar ion-button:focus,
+ion-toolbar ion-icon:hover,
+ion-toolbar ion-icon:focus {
+  color: #ffffff;
+}
+
+/* Ion-padding: fondo oscuro uniforme */
+.ion-padding {
+  --background: #1e1e1e;
+}
+
+/* Ion-badge: resalta sobre fondos oscuros */
+ion-badge {
+  margin-top: -10px;
+  margin-left: -8px;
+  --background: var(--ion-color-primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ========================================
+   1. Segmento “Simple / Multiple”
+   ======================================== */
+
+/* 1. Fondo general del wrapper de segmentos */
+.segment-wrapper {
+  display: flex;
+  justify-content: center;
+  background: #2c2c2e;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* 2. Contenedor de ion-segment */
+.simple-segment {
+   --background: #1F1F1F;
+    --color: #E0E0E0;
+    --indicator-background: var(--ion-color-primary);
+}
+
+/* 3. Botones del segmento (no seleccionados) */
+.simple-segment ion-segment-button {
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;                          /* Texto gris claro por defecto */
+  --background: transparent;
+  font-weight: 500;
+  padding: 8px 12px;
+   --color-checked: var(--ion-color-primary);
+    --color: #B0B0B0;
+}
+
+/* 4. Estado hover/focus para botones no seleccionados */
+.simple-segment ion-segment-button:hover,
+.simple-segment ion-segment-button:focus {
+  background: rgba(255, 255, 255, 0.08);
+  --color: var(--ion-color-primary);                           /* Texto claro al pasar el mouse o enfocar */
+}
+
+/* 5. Botón seleccionado (aria-checked="true") */
+.simple-segment ion-segment-button[aria-checked="true"] {
+  --background: #ff3b30;                       /* Fondo rojo */
+  --color: #ffffff;                            /* Texto blanco sobre fondo rojo */
+}
+
+/* ========================================
+   2. Buscador (search-wrapper + search-card)
+   ======================================== */
+
+/* Wrapper general para posicionar el buscador */
+.search-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 90%, 500px);
+  z-index: 1000;
+  pointer-events: auto;
+  margin: 30px 0;
+}
+
+/* Capa semitransparente detrás del buscador */
+.search-wrapper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  z-index: -1;
+}
+
+/* Card principal del buscador */
+.search-wrapper > ion-card.search-card {
+  margin: 0;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(44, 44, 46, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Contenido interno de la card */
+.search-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #e0e0e0;
+}
+
+/* Ítems de ubicación/destino */
+.search-card .location-item,
+.search-card .destination-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  --inner-padding-top: 6px;
+  --inner-padding-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+.search-card .location-item:hover,
+.search-card .destination-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+/* Iconos dentro de la card */
+.search-card ion-icon {
+  font-size: 1.2rem;
+  color: #9a9a9a;
+  flex-shrink: 0;
+}
+
+/* Inputs dentro de la card */
+.search-card ion-input {
+  font-size: 16px;
+  color: #e0e0e0;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  flex: 1;
+}
+
+/* Botones claros dentro de la card (por ejemplo, para cerrar) */
+.search-card ion-button[fill="clear"] ion-icon {
+  font-size: 1rem;
+  color: #bbbbbb;
+  transition: color 0.2s ease;
+}
+.search-card ion-button[fill="clear"]:hover ion-icon,
+.search-card ion-button[fill="clear"]:focus ion-icon {
+  color: #ffffff;
+}
+
+/* Sección de viajes frecuentes dentro de la card (si aplica) */
+.search-card .frequent-section {
+  margin-top: 20px;
+}
+.search-card .frequent-section h6 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #bbbbbb;
+  font-weight: 600;
+}
+
+/* Lista de resultados dentro de la card */
+.search-card ion-list {
+  max-height: 140px;
+  overflow-y: auto;
+  background: transparent;
+}
+
+/* Ítems dentro de la lista de la card */
+.search-card ion-item {
+  --min-height: 44px;
+  background: transparent;
+  color: #e0e0e0;
+  border-radius: 8px;
+  --ion-item-background: transparent;
+  transition: background 0.2s ease;
+}
+.search-card ion-item:hover,
+.search-card ion-item:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  .search-card ion-card-content {
+    padding: 12px;
+  }
+}
+
+/* Botón "Confirmar" dentro de la card */
+.search-card ion-button.confirmar {
+  --background: var(--ion-color-primary);
+  --color: #ffffff;
+  margin: 12px 0;
+  align-self: stretch;
+  transition: opacity 0.2s ease;
+}
+.search-card ion-button.confirmar:hover,
+.search-card ion-button.confirmar:focus {
+  opacity: 0.9;
+}
+
+
+
+
+/* 3.1. Lista principal */
+.trip-list {
+  background: #1e1e1e;        /* Mismo fondo oscuro general */
+  color: #e0e0e0;             /* Texto claro por defecto */
+  border-radius: 8px;
+  overflow: hidden;           /* Para bordes redondeados en items */
+  margin: 16px 0;
+}
+
+/* 3.2. Encabezado de la lista */
+.trip-list .ss {
+  --background: #2c2c2e;      /* Gris oscuro uniforme */
+  padding: 12px 16px;
+  border-bottom: 1px solid #3a3a3c;
+}
+
+/* 3.3. Etiqueta “Viajes Frecuentes” */
+.frequent-trips-label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.frequent-trips-label ion-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+  color: var(--ion-color-primary);
+}
+
+/* 3.4. Cada elemento de viaje */
+.trip-item {
+  --background: transparent;  /* Permite ver el fondo de .trip-list */
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #3a3a3c;
+  transition: background 0.2s ease;
+}
+.trip-item:last-of-type {
+  border-bottom: none;
+}
+.trip-item:hover,
+.trip-item:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 3.5. Icono de cada viaje */
+.trip-icon {
+  font-size: 1.5rem;
+  color: var(--ion-color-primary);
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* 3.6. Información principal del viaje */
+.trip-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.trip-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+.trip-info p {
+  margin: 2px 0 0;
+  font-size: 0.875rem;
+  color: #bbbbbb;
+}
+
+/* 3.7. Meta (precio y distancia) */
+.trip-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 12px;
+  text-align: right;
+}
+.trip-meta h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+.trip-meta p {
+  margin: 2px 0 0;
+  font-size: 0.875rem;
+  color: #bbbbbb;
+}
+
+/* 3.8. Botones de acción (editar, eliminar) */
+.trip-end {
+  display: flex;
+  align-items: center;      /* Alinea verticalmente al centro */
+  gap: 12px;                 /* Espacio entre meta y botones */
+}
+
+/* Estilos para el label que muestra precio/distancia */
+.trip-meta {
+  text-align: right;         /* Que el texto esté alineado a la derecha */
+  /* Opcional: ajustar márgenes si necesitas más separación */
+}
+
+/* Bloque de botones de acción */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;                  /* Separación entre editar/eliminar */
+}
+
+/* Botón “editar” con fondo claro y icono primario */
+.btn-edit {
+  shape: round;
+  fill: solid;
+  size: small;
+  --background: transparent;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit ion-icon {
+  font-size: 1.2rem;
+  color: var(--ion-color-secondary);
+}
+
+/* Botón “eliminar” con fondo claro y icono rojo */
+.btn-delete {
+  shape: round;
+  fill: solid;
+  size: small;
+  --background: var(--ion-color-light);
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+}
+
+.btn-delete ion-icon {
+  font-size: 1.2rem;
+  color: #ff4d4d;
+}
+
+/* Efecto hover/focus para ambos botones (ligero cambio de fondo) */
+.action-buttons ion-button:hover,
+.action-buttons ion-button:focus {
+  --background: rgba(0, 0, 0, 0.05);
+}
+
+/* 3.9. Enlace “Ver historial completo” */
+.view-history-item {
+  --background: transparent;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  color: var(--ion-color-primary);
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+.view-history-item ion-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+.view-history-item:hover,
+.view-history-item:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+
+
+

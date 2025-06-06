@@ -1,0 +1,53 @@
+<ion-header class="modal-header">
+  <div class="handle-bar"></div>
+  <ion-toolbar>
+    <ion-title>Detalles de tu viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="driver-card">
+    <ion-card-header>
+      <ion-avatar class="avatar">
+        <img [src]="driver.photo" />
+      </ion-avatar>
+      <ion-card-title>{{ driver.name }}</ion-card-title>
+
+      <div class="vehicle-info">
+        <ion-card-subtitle>{{ driver.vehicle }}</ion-card-subtitle>
+        <span class="vehicle-color-name">{{ driver.color }}</span>
+      </div>
+
+      <div class="stars">
+        <ion-icon *ngFor="let _ of getStars(driver.rating)" name="star"></ion-icon>
+        <span class="rating">{{ driver.rating.toFixed(1) }}</span>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="info-row">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>Recogida en {{ driver.eta }}</span>
+      </div>
+      <div class="info-row">
+        <ion-icon name="car-outline"></ion-icon>
+        <span>Matrícula: {{ driver.plate }}</span>
+      </div>
+      <div class="info-row">
+        <ion-icon name="call-outline"></ion-icon>
+        <span>Teléfono: {{ driver.phone }}</span>
+      </div>
+
+     <div class="button-row">
+  <ion-button expand="block" color="primary" (click)="share()">
+    <ion-icon slot="start" name="share-social-outline"></ion-icon>
+    Compartir
+  </ion-button>
+  <ion-button expand="block" color="secondary" (click)="follow()">
+    <ion-icon slot="start" name="navigate-outline"></ion-icon>
+    Seguir en mapa
+  </ion-button>
+</div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

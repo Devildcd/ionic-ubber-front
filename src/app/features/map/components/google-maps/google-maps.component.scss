@@ -1,0 +1,33 @@
+google-map {
+  display: block; 
+  width: 100%;
+  height: 100%;
+}
+
+
+.custom-fabs {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  ion-fab-button {
+    --border-radius: 50%;
+    /* ajustes visuales extra si quieres */
+  }
+}
+
+.fab-small {
+  --width: 20px;
+  --height: 20px;
+  --border-radius: 20px; 
+}
+
+
+
+
+
+
+

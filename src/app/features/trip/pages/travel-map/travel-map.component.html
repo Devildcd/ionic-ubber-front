@@ -1,0 +1,13 @@
+
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button class="menu-fab">
+    <ion-icon name="arrow-back-outline" color="primary"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<div class="map-container">
+    <app-google-maps
+      [center]="santiagoDeCubaCenter"
+      [zoom]="13">
+    </app-google-maps>
+  </div>
