@@ -4,6 +4,7 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { ProfileSettingsComponent } from './pages/profile-settings/profile-settings.component';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     UserProfileRoutingModule,
     IonicModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserProfileModule { }

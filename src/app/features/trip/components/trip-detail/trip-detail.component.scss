@@ -1,14 +1,31 @@
 /* ========================================
    1. Encabezado con degradado
    ======================================== */
-.header-gradient {
-  /* Cambio a un degradado oscuro */
-  --background: linear-gradient(135deg, #1f2733, #2c3440);
+ion-header.header-gradient {
+  background: linear-gradient(135deg, #2c2c2e, #1b1b1b) !important;
+  --background: linear-gradient(135deg, #1f2733, #2c2c2e) !important;
+  color: #e0e0e0;
+}
 
-  ion-title {
-    color: #e0e0e0;         /* Texto claro */
-    font-weight: 600;
-  }
+ion-header.header-gradient ion-toolbar {
+  --background: transparent !important;
+  --color: #e0e0e0 !important;
+  color: #e0e0e0 !important;
+}
+
+ion-header.header-gradient ion-toolbar ion-title {
+  color: #e0e0e0 !important;
+  font-weight: 600;
+  text-align: center;
+  font-size: 18px;
+}
+
+ion-header.header-gradient .drag-handle {
+  width: 45px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin: 10px auto;
 }
 
 /* ========================================
@@ -33,38 +50,50 @@
 /* ========================================
    4. Segmento dentro de una tarjeta (card-segment)
    ======================================== */
-.card-segment {
-  margin: 16px 15px;
-  --box-shadow: none;
-  
-
-  ion-segment {
-    background: transparent;       /* Fondo oscuro para el segmento */
-    --indicator-color: #ff6f61; /* Mantiene indicador en rojo */
-    --indicator-height: 4px;
-
-    ion-segment-button {
-      --color: #bbbbbb;         /* Texto gris claro en no seleccionado */
-      --color-checked: #ff6f61; /* Texto rojo cuando está activo */
-      font-weight: 500;
-      text-transform: capitalize;
-      padding: 8px 20px;
-
-      ion-icon {
-        margin-right: 4px;
-        color: #bbbbbb;         /* Icono gris claro cuando no está activo */
-      }
-    }
-
-    /* Botón seleccionado (checked) */
-    ion-segment-button[aria-checked="true"] {
-      --background: rgba(255, 111, 97, 0.1); /* Fondo rojo claro semitransparente */
-      ion-icon {
-        color: #ff6f61;       /* Icono en rojo cuando está activo */
-      }
-    }
+/* Segmentos (principal y filtros) */
+  .simple-segment {
+    margin-top: 20px;
   }
-}
+
+  .card-segment {
+    background: transparent;
+  }
+
+  .simple-segment,
+  .filter-segment {
+    --background: #1F1F1F;
+    --color: #E0E0E0;
+    --indicator-background: var(--ion-color-primary);
+  }
+
+  .simple-segment ion-segment-button,
+  .filter-segment ion-segment-button {
+    --color-checked: var(--ion-color-primary);
+    --color: #B0B0B0;
+     transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* Controles de historial (div con filtros y botón) */
+  .history-controls {
+    background-color: transparent;
+    padding: 0.5rem;
+    margin-top: 10px;
+  }
+
+  .history-controls ion-button {
+    --background: transparent;
+    --color: #E0E0E0;
+  }
+
+  .filter-container {
+    flex: 1;
+  }
+
+  /* Listas de historial y tarjetas (ahora con margen lateral aplicado arriba) */
+  ion-list.historial-list,
+  ion-list.rating-history-list {
+    background-color: transparent;
+  }
 
 /* ========================================
    5. Tarjeta de ruta (card-route)

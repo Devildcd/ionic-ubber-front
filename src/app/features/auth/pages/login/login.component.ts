@@ -81,14 +81,15 @@ export class LoginComponent  implements OnInit {
       next: async (resp: any) => {
         await loading.dismiss();
 
-        // Guardar los tokens en localStorage o en Ionic Storage (depende de tu flujo)
-        localStorage.setItem('accessToken', resp.accessToken);
-        localStorage.setItem('refreshToken', resp.refreshToken);
+        // Guardar los tokens en localStorage o en Ionic Storage 
+        // localStorage.setItem('accessToken', resp.accessToken);
+        // localStorage.setItem('refreshToken', resp.refreshToken);
+        localStorage.setItem('user', JSON.stringify(resp.user));
 
         const toast = await this.toastCtrl.create({
           message: `Bienvenido`,
           duration: 2000,
-          color: 'success',
+          color: 'danger',
         });
         await toast.present();
 

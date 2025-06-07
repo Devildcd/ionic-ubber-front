@@ -7,37 +7,49 @@
 
 <ion-content class="content-bg">
   <ion-card class="card-segment">
-    <ion-segment [(ngModel)]="tripType">
-      <ion-segment-button value="normal">
-        <ion-icon name="walk-outline"></ion-icon>
-        <ion-label>Normal</ion-label>
+    <div class="history-controls">
+  <!-- 2) Controles comunes: FILTROS de tiempo -->
+  <div class="filter-container">
+    <ion-segment
+     
+      class="filter-segment"
+    >
+      <ion-segment-button value="recent">
+        <ion-icon name="card-outline"></ion-icon>
+        <ion-label>Económico</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="confort">
-        <ion-icon name="star-outline"></ion-icon>
+      <ion-segment-button value="week">
+        <ion-icon name="trophy-outline"></ion-icon>
         <ion-label>Confort</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="month">
+        <ion-icon name="diamond-outline"></ion-icon>
+        <ion-label>Premium</ion-label>
+      </ion-segment-button>
     </ion-segment>
+  </div>
+</div>
   </ion-card>
 
   <ion-card class="card-route">
     <div class="route-points">
       <div class="point">
-        <ion-icon name="locate-outline"></ion-icon>
+        <ion-icon name="locate-outline" color="primary"></ion-icon>
         <span>Parque Central</span>
       </div>
       <ion-icon class="divider-icon" name="ellipsis-vertical-outline"></ion-icon>
       <div class="point">
-        <ion-icon name="flag-outline"></ion-icon>
+        <ion-icon name="flag-outline" color="primary"></ion-icon>
         <span>Museo de Arte</span>
       </div>
     </div>
     <div class="route-meta">
       <div class="meta-item">
-        <ion-icon name="time-outline"></ion-icon>
+        <ion-icon name="time-outline" color="secondary"></ion-icon>
         <span>4,8 km • 12 min</span>
       </div>
       <div class="meta-item">
-        <ion-icon name="cash-outline"></ion-icon>
+        <ion-icon name="cash-outline" color="secondary"></ion-icon>
         <span>$15.00</span>
       </div>
     </div>
@@ -45,8 +57,8 @@
 
   <!-- Acciones -->
   <div class="actions">
-    <ion-button id="open-loading" expand="block" class="btn-confirm" (click)="openDriverModal()">Confirmar</ion-button>
+    <ion-button id="open-loading" expand="block" class="btn-confirm" (click)="openDriverModal()">Aceptar</ion-button>
     <ion-loading trigger="open-loading" message="Procesando..." [duration]="3000" spinner="circles"></ion-loading>
-    <ion-button expand="block" fill="clear" class="btn-cancel">Cancelar</ion-button>
+     <ion-button id="open-loading" expand="block" class="btn-confirm" color="medium">Cancelar</ion-button>
   </div>
 </ion-content>

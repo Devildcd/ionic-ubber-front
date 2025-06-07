@@ -100,6 +100,15 @@ ion-card-title {
   background: transparent; /* Botón sobre fondo oscuro */
 }
 
+.btn-edit {
+  transition: background-color 0.3s ease, color 0.3s ease,
+              transform 0.2s ease;
+}
+
+.btn-edit:hover {
+  transform: scale(1.03);
+}
+
 ion-item {
   --min-height: 50px;
   background: transparent; /* Fondo transparente para que se vea el fondo oscuro */

@@ -1,132 +1,136 @@
-/* ------------------------------------------------------------
-  1) Estilos globales del menú en modo oscuro
------------------------------------------------------------- */
+/* 1. Modo oscuro general del menú */
 .dark-menu {
-  --background: #121212;             /* Fondo general del menú */
-  --color: #E0E0E0;                  /* Color de texto predeterminado */
-  --ion-item-background: transparent;/* Los items toman el fondo por defecto */
+  --background: #121212;
+  --color: #E0E0E0;
+  --ion-item-background: transparent;
+  width: 85vw;              // Ancho adaptable a pantallas pequeñas
+  max-width: 320px;         // Límite máximo en pantallas grandes
 }
 
-/* ------------------------------------------------------------
-  2) Toolbar oscuro con logo y título
------------------------------------------------------------- */
+/* 2. Toolbar con logo y título */
 .menu-toolbar {
-  --background: #1F1F1F;             /* Fondo más claro que el general para destacarlo */
-  padding: 0 1rem;
+  --background: #1F1F1F;
   display: flex;
   align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 0.75rem;
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  ion-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
 }
 
-.menu-toolbar .logo {
-  width: 32px;
-  height: 32px;
-  margin-right: 0.75rem;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
-.menu-toolbar ion-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #FFFFFF;                    /* Texto blanco para el título */
-}
-
-/* ------------------------------------------------------------
-  3) Sección de perfil (avatar + nombre/usuario)
------------------------------------------------------------- */
+/* 3. Perfil */
 .profile-section {
-  --background: #1F1F1F;             /* Mismo fondo que toolbar para continuidad visual */
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
+  --background: #1F1F1F;
+  padding: 1rem 1rem 0.5rem 1rem;
+  align-items: center;
+
+  ion-avatar {
+    --size: 48px;
+    border: 2px solid #333;
+    margin-right: 0.75rem;
+  }
+
+  .profile-text {
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+
+    p {
+      font-size: 0.85rem;
+      margin: 0;
+      color: #bbb;
+    }
+  }
 }
 
-.profile-section ion-avatar {
-  --size: 48px;
-  margin-right: 0.75rem;
-  border: 2px solid #333333;         /* Borde sutil alrededor del avatar */
-}
-
-.profile-section .profile-text h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  color: #FFFFFF;
-}
-
-.profile-section .profile-text p {
-  font-size: 0.85rem;
-  margin: 0;
-  color: #BBBBBB;
-}
-
-/* ------------------------------------------------------------
-  4) Contenido del listado (scrollable)
------------------------------------------------------------- */
+/* 4. Lista scrollable */
 .menu-content {
-  --background: #121212;             
-  padding-top: 0.5rem;               /* Pequeño acolchado superior */
+  --background: #121212;
+  padding: 0.5rem 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #1F1F1F;
+    border-radius: 3px;
+  }
 }
 
-/* Personalizar scrollbar en modo oscuro (WebKit) */
-.menu-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.menu-content::-webkit-scrollbar-track {
-  background: #1F1F1F;
-  border-radius: 3px;
-}
-
-.menu-content::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 3px;
-}
-
-/* ------------------------------------------------------------
-  5) Cada ítem del menú
------------------------------------------------------------- */
+/* 5. Ítems del menú */
 .menu-item {
   --background: transparent;
-  --color: #E0E0E0;                  /* Texto e icono en gris claro */
+  --color: #E0E0E0;
   padding: 0.75rem 1rem;
+  margin: 0.25rem 0;
   border-radius: 0.5rem;
-  margin: 0.25rem 0;                 /* Espacio vertical entre cada item */
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease;
+
+  ion-icon {
+    font-size: 1.2rem;
+    margin-right: 0.75rem;
+    color: inherit;
+  }
+
+  &:hover {
+    --background: #2A2A2A;
+  }
+
+  &:active {
+    --background: #383838;
+    --color: #FFF;
+  }
+
+  ion-ripple-effect {
+    --ripple-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .item-native {
+    color: #E0E0E0 !important;
+  }
 }
 
-.menu-item ion-icon {
-  font-size: 1.2rem;
-  margin-right: 0.75rem;
-  color: #E0E0E0;                    /* Icono en gris claro */
-}
+/* 6. Responsive ajustes */
+@media (max-width: 360px) {
+  .menu-toolbar {
+    flex-direction: row;
+    ion-title {
+      font-size: 1rem;
+    }
+  }
 
-/* Estado “hover” y “active” de cada item */
-.menu-item:hover {
-  --background: #2A2A2A;
-}
+  .profile-section .profile-text {
+    h2 {
+      font-size: 0.95rem;
+    }
 
-.menu-item:active {
-  --background: #383838;
-  --color: #FFFFFF;                  /* Texto e icono en blanco al hacer tap */
-}
+    p {
+      font-size: 0.75rem;
+    }
+  }
 
-/* Separador opcional (si quisieras una línea entre grupos de opciones) */
-.menu-item.divider {
-  --border-color: #333333;
-  border-bottom: 1px solid var(--border-color);
-  margin: 0.5rem 0;
-}
-
-/* ------------------------------------------------------------
-  6) Ajustes adicionales: estilos de selección y ripples
------------------------------------------------------------- */
-/* Ripple de Ionic más tenue para que combine con el fondo oscuro */
-.menu-item ion-ripple-effect {
-  --ripple-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Para garantizar que el texto nunca sea oscuro sobre fondo oscuro */
-.menu-item .item-native {
-  color: #E0E0E0 !important;
+  .menu-item {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.95rem;
+  }
 }

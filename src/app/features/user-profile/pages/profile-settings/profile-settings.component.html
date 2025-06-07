@@ -13,46 +13,85 @@
 <ion-content class="ion-padding perfil-container">
 
   <!-- ✨ Tarjeta de Perfil -->
+   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Mi Perfil</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <!-- Foto de perfil -->
-      <div class="profile-pic-wrapper">
-        <img src="assets/images/user.png" class="profile-pic" />
-      </div>
-      <!-- Campos de información -->
-      <ion-list lines="none">
-        <ion-item>
-          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-          <ion-label>
-            <h3>Nombre completo</h3>
-            <p>Juan Pérez</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-label>
-            <h3>Correo electrónico</h3>
-            <p>juan.perezexample.com</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="call-outline" slot="start"></ion-icon>
-          <ion-label>
-            <h3>Teléfono</h3>
-            <p>+1 555 123 4567</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-      <!-- Botón Editar -->
-      <ion-button expand="block" fill="outline" class="btn-edit">
-        <ion-icon slot="start" name="create-outline"></ion-icon>
-        Editar Perfil
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-header>
+        <ion-card-title>Mi Perfil</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Foto de perfil -->
+        <div class="profile-pic-wrapper">
+          <img
+            [src]="user?.profileImage || 'assets/images/user.png'"
+            class="profile-pic"
+          />
+        </div>
+
+        <!-- Campos de información -->
+        <ion-list lines="none">
+          <!-- Nombre -->
+          <ion-item>
+            <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+            <ng-container *ngIf="!isEditing; else editName">
+              <ion-label>
+                <h3>Nombre completo</h3>
+                <p>{{ user?.name }}</p>
+              </ion-label>
+            </ng-container>
+            <ng-template #editName>
+              <ion-input
+                formControlName="name"
+                placeholder="Nombre completo"
+              ></ion-input>
+            </ng-template>
+          </ion-item>
+
+          <!-- Correo -->
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ng-container *ngIf="!isEditing; else editEmail">
+              <ion-label>
+                <h3>Correo electrónico</h3>
+                <p>{{ user?.email }}</p>
+              </ion-label>
+            </ng-container>
+            <ng-template #editEmail>
+              <ion-input
+                formControlName="email"
+                placeholder="Correo electrónico"
+              ></ion-input>
+            </ng-template>
+          </ion-item>
+
+          <!-- Teléfono (siempre lectura) -->
+          <ion-item>
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h3>Teléfono</h3>
+              <p>{{ user?.phone }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- Botón togglear entre editar y guardar -->
+        <ion-button
+  expand="block"
+  [fill]="isEditing ? 'solid' : 'outline'"
+  [color]="isEditing ? (canSave ? 'primary' : 'medium') : 'primary'"
+  class="btn-edit"
+  (click)="isEditing ? null : toggleEdit()"
+  [type]="isEditing ? 'submit' : 'button'"
+  [disabled]="isEditing && !canSave"
+>
+  <ion-icon
+    slot="start"
+    [name]="isEditing ? 'checkmark-outline' : 'create-outline'"
+  ></ion-icon>
+  {{ isEditing ? 'Guardar cambios' : 'Editar Perfil' }}
+</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
 
   <!-- ✨ Formulario de Contraseña (simulado) -->
   <ion-card>

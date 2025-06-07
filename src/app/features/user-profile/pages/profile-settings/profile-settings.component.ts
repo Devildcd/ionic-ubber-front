@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { ProfileService } from '../../services/profile.service';
+import { LoadingController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './profile-settings.component.html',
@@ -7,51 +9,100 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
   standalone: false
 })
 export class ProfileSettingsComponent  implements OnInit {
- profileForm!: FormGroup;
-  previewUrl: string | ArrayBuffer | null = null;
+  profileForm!: FormGroup;
+  user: any;
+  isEditing = false;
 
-  constructor(private fb: FormBuilder) {}
+   constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) {
+    this.profileForm = this.fb.group({
+      name: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+      ],
+      email: ['', [Validators.email, Validators.maxLength(255)]],
+    });
+  }
 
-  ngOnInit() {
-    this.profileForm = this.fb.group(
-      {
-        fullName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        phone: [''],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
-        photo: [null],
+  async ngOnInit() {
+  this.loadingCtrl.create({ message: 'Cargando perfil...' }).then(loader => {
+    loader.present();
+    this.profileService.getProfile().subscribe({
+      next: resp => {
+        loader.dismiss();
+        this.user = resp.data;
+        this.profileForm.patchValue({
+          name: this.user.name,
+          email: this.user.email,
+        });
+        console.log(this.user)
       },
-      { validators: this.passwordMatchValidator }
-    );
+      error: () => {
+        loader.dismiss();
+        this.presentToast('Error cargando perfil', 'danger');
+      }
+    });
+  });
+   this.profileForm.markAsPristine();
+}
+
+async onSubmit() {
+  if (!this.canSave) {
+    return;
   }
 
-  get formControls(): { [key: string]: AbstractControl } {
-    return this.profileForm.controls;
-  }
+  const { name, email } = this.profileForm.value;
 
-  passwordMatchValidator(group: FormGroup) {
-    const pass = group.get('password')?.value;
-    const confirm = group.get('confirmPassword')?.value;
-    return pass === confirm ? null : { mismatch: true };
-  }
+  const loader = await this.loadingCtrl.create({ message: 'Guardando cambios...' });
+  await loader.present();
 
-  onFileSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0] || null;
-    this.profileForm.patchValue({ photo: file });
-    this.profileForm.get('photo')?.updateValueAndValidity();
+  this.profileService.updateProfile({ name, email }).subscribe({
+    next: resp => {
+      loader.dismiss();
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.previewUrl = reader.result;
-    };
-    if (file) reader.readAsDataURL(file);
-  }
+      this.user = resp.data;
 
-  onSubmit() {
-    if (this.profileForm.valid) {
-      // Aquí enviarías los datos al backend
-      console.log('Datos de perfil:', this.profileForm.value);
+      this.isEditing = false;
+
+      this.profileForm.patchValue({
+        name: this.user.name,
+        email: this.user.email,
+      });
+      this.profileForm.markAsPristine();
+
+      this.presentToast('Perfil actualizado', 'danger');
+    },
+    error: () => {
+      loader.dismiss();
+      this.presentToast('Error actualizando perfil', 'danger');
     }
+  });
+}
+
+
+get canSave(): boolean {
+    return this.isEditing && this.profileForm.dirty && this.profileForm.valid;
+  }
+
+
+   toggleEdit() {
+    this.isEditing = !this.isEditing;
+    if (!this.isEditing) {
+      // cancelar edición: restaurar valores y estado
+      this.profileForm.patchValue({
+        name: this.user.name,
+        email: this.user.email,
+      });
+      this.profileForm.markAsPristine();
+    }
+  }
+
+  private async presentToast(message: string, color: string) {
+    const toast = await this.toastCtrl.create({ message, color, duration: 2000 });
+    toast.present();
   }
 }

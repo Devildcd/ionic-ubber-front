@@ -36,9 +36,23 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
  @import "@ionic/angular/css/palettes/dark.class.css";
 
+ion-button.button {
+  --box-shadow: none;
+  --background-activated: #ff4343 !important; /* cambia el color de tap */
+  --color-activated: #ffffff !important;      /* texto cuando está activo */
+}
+
+ion-fab-button {
+  --background-activated: #7c7c7c !important; /* cambia el color de tap */
+  --color-activated: #ffffff !important;      /* texto cuando está activo */
+}
+
+
 ion-content {
   --background: #f1f1f1; /* tu color */
 }
+
+
 
 
 .driver-detail-popover {
