@@ -9,7 +9,7 @@ const routes: Routes = [
       import('./features/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: '',
+    path: 'tabs',
     loadChildren: () =>
       import('./features/tabs/tabs.module').then((m) => m.TabsModule)
   },

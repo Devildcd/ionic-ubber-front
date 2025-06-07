@@ -5,7 +5,7 @@ import { TabsPageComponent } from './tabs.page/tabs.page.component';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPageComponent,
     children: [
       {
