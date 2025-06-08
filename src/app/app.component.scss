@@ -10,20 +10,23 @@
 /* 2. Toolbar con logo y título */
 .menu-toolbar {
   --background: #1F1F1F;
-  display: flex;
-  align-items: center;
   padding: 0.5rem 1rem;
-  gap: 0.75rem;
+
+  .logo-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
   .logo {
-    width: 62px;
-    height: 62px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
     border-radius: 6px;
   }
 
-  ion-title {
-    font-size: 1.125rem;
+  .app-title {
+    font-size: 1.25rem;
     font-weight: 600;
     color: #FFFFFF;
   }
